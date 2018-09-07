@@ -62,25 +62,25 @@ This demonstration requires a Cosmos DB instance to be created in Azure; this mi
 4.	Wait for the script to finish.
 5.	In Internet Explorer, go to **http://portal.azure.com**, and sign in using the Microsoft account that is associated with your Azure Learning Pass subscription.
 6.	In the Azure portal, in the left panel, click **Azure Cosmos DB**, and then click **+ Add**.
-7.	On the **Azure Cosmos DB** blade, in the **ID** box, type **20777a-sql-&lt;your name&gt;-&lt;the day&gt;**, for example, **20777a-sql-john-31**.
+7.	On the **Azure Cosmos DB** blade, in the **ID** box, type **20777a-sql-\<your name\>-\<the day\>**, for example, **20777a-sql-john-31**.
 8.	In the **API** drop-down list, note the options available, and then click **SQL**.
 9.	In the **Resource Group** box, type **20777Mod06**.
 10.	In the **Location** drop-down list, click the region closest to your current location, and then click **Create**.
 11.	Wait for the Azure Cosmos DB to be created—this could take a few minutes.
-12.	On the **Azure Cosmos DB** blade, click **Refresh**, and then click **20777a-sql-&lt;your name&gt;-&lt;the day&gt;**.
-13.	On the **20777a-sql-&lt;your name&gt;-&lt;the day&gt;** blade, click **Data Explorer**, and then click **New Database**.
+12.	On the **Azure Cosmos DB** blade, click **Refresh**, and then click **20777a-sql-\<your name\>-\<the day\>**.
+13.	On the **20777a-sql-\<your name\>-\<the day\>** blade, click **Data Explorer**, and then click **New Database**.
 14.	On the **New Database** blade, in the **Database id** box, type **MovieLens**, and then click **OK**.
 15.	In the **SQL API** pane, click **New Collection**.
 16.	On the **Add Collection** blade, under **Database id**, click **Use existing**, and then in the drop-down list, click **MovieLens**.
 17.	In the **Collection Id** box, type **moviedata**.
 18.	In the **Throughput (400 - 10,000 RU/s)** box, type **1000**, and then click **OK**.
-19.	On the **20777a-sql-&lt;your name&gt;-&lt;the day&gt;** blade, under **SETTINGS**, click **Keys**.
+19.	On the **20777a-sql-\<your name\>-\<the day\>** blade, under **SETTINGS**, click **Keys**.
 20.	Make a note of the **PRIMARY CONNECTION STRING** value.
 21.	In File Explorer, go to **E:\Demofiles\Mod06\Demo01**, right-click **Demo01-setup.ps1**, and then click **Run with PowerShell**.
 22.	Right-click anywhere inside the PowerShell window to paste your primary connection string, and then press Enter.
 23.	Wait for the script to finish—it will take a couple of minutes.
 24.	When the script is complete, press Enter to close the PowerShell window.
-25.	In Internet Explorer, on the **20777a-sql-&lt;your name&gt;-&lt;the day&gt;** blade, click **Data Explorer**.
+25.	In Internet Explorer, on the **20777a-sql-\<your name\>-\<the day\>** blade, click **Data Explorer**.
 26.	In the **SQL API** pane, expand **moviedata**, and then click **Documents**.
 27.	In the **Documents** pane, a list of documents will appear.
 
@@ -88,7 +88,7 @@ This demonstration requires a Cosmos DB instance to be created in Azure; this mi
 1.	In the left panel, click **+ Create a resource**.
 2.	On the **New** blade, in the **Search** box, type **azure search**, and then press Enter.
 3.	On the **Everything** blade, click **Azure Search**, and then click **Create**.
-4.	On the **New Search Service** blade, in the **URL** box, type **20777a-search-&lt;your name&gt;-&lt;the day&gt;**.
+4.	On the **New Search Service** blade, in the **URL** box, type **20777a-search-\<your name\>-\<the day\>**.
 5.	Under **Resource** group, click **Use existing**, and then in the drop-down list, click **20777Mod06**.
 6.	In the **Location** box, select the same location as you selected for your Cosmos DB account in the previous step, or the closest physical location if the location you selected in the last step is not available.
 7.	Click **Pricing tier**.
@@ -97,12 +97,12 @@ This demonstration requires a Cosmos DB instance to be created in Azure; this mi
 10.	Wait for the search account to be created before proceeding.
 
 #### Task 3: Use Azure Search to index Cosmos DB
-1.	In the left panel, click **All resources**, and then click **20777a-search-&lt;your name&gt;-&lt;the day&gt;**.
-2.	On the **20777a-search-&lt;your name&gt;-&lt;the day&gt;** blade, click **Import data**.
+1.	In the left panel, click **All resources**, and then click **20777a-search-\<your name\>-\<the day\>**.
+2.	On the **20777a-search-\<your name\>-\<the day\>** blade, click **Import data**.
 3.	On the **Import data** blade, click **Connect to your data**.
 4.	On the **Data Source** blade, click **Cosmos DB**.
 5.	On the **New data source** blade, in the **Name** box, type **movielens-cosmos**, and then click **Select an account**.
-6.	On the **Cosmos DB accounts** blade, click **20777a-sql-&lt;your name&gt;-&lt;the day&gt;**.
+6.	On the **Cosmos DB accounts** blade, click **20777a-sql-\<your name\>-\<the day\>**.
 7.	On the **New data source** blade, in the **Database** drop-down list, click **MovieLens**.
 8.	In the **Collection** drop-down list, click **moviedata**, and then click **OK**.
 9.	On the **Import data** blade, click **Customize target index**.
@@ -124,7 +124,7 @@ This demonstration requires a Cosmos DB instance to be created in Azure; this mi
 
 
 #### Task 4: Run searches with Azure Search
-1.	On the **20777a-search-&lt;your name&gt;-&lt;the day&gt;** blade, click **Search explorer**.
+1.	On the **20777a-search-\<your name\>-\<the day\>** blade, click **Search explorer**.
 2.	On the **Search explorer** blade, click **Search** to run a search without a filter. Observe that the first 50 results are returned, and that only the retrievable properties (**title**, **genres**, **tags**, **year**, and **id**) are returned in the results. An application could use the **id** to quickly fetch the document from the Cosmos DB database.
 3.	In the **Query string** box, type **$top=3**, and then click **Search**. Observe that three results are returned.
 4.	Click **Search**, observe that the same three results are returned.
@@ -184,7 +184,7 @@ This demonstration requires a Cosmos DB instance to be created in Azure; this mi
     $top=10&queryType=full&search=blue&$filter=genres/any(t: t eq 'Action')
     ```
     Observe that eight matching records are returned that all have the **Action** genre.
-15.	In the left panel, click **All resources**, click **20777a-sql-&lt;your name&gt;-&lt;the day&gt;**, and then click **Data Explorer**.
+15.	In the left panel, click **All resources**, click **20777a-sql-\<your name\>-\<the day\>**, and then click **Data Explorer**.
 16.	In the **SQL API** pane, expand **moviedata**, click **Documents**, and then click **New Document**.
 17.	On the **Documents** tab, edit the new document definition so that it reads as follows, and then click **Save**:
 
@@ -195,18 +195,18 @@ This demonstration requires a Cosmos DB instance to be created in Azure; this mi
         "year":  "2018"
     }
     ```
-18.	On the **All Resources** blade, click **20777a-search-&lt;your name&gt;-&lt;the day&gt;**, and then click **Search explorer**. 
+18.	On the **All Resources** blade, click **20777a-search-\<your name\>-\<the day\>**, and then click **Search explorer**. 
 19.	On the **Search explorer** blade, in the **Query string** box, type **"missing from my index"** (including quotes), and then click **Search**. Observe that no results are returned; the new value has not been added to the index.
 20.	Close the **Search explorer** blade.
-21.	On the **20777a-search-&lt;your name&gt;-&lt;the day&gt;** blade, under **Usage**, click **Indexers**.
+21.	On the **20777a-search-\<your name\>-\<the day\>** blade, under **Usage**, click **Indexers**.
 22.	On the **Indexers** blade, click **indexer01**.
 23.	On the **indexer01** blade, click **Run**.
 24.	In the **Run indexer** dialog box, click **Yes**.
 25.	The indexer will take about 10 seconds to update the index; the **indexer01** blade should automatically update to show the result of the indexer run—observe that in the **DOCS SUCCEEDED** column, a new row is added to the history, showing **1/1**.
 26.	Close the **indexer01**, and **Indexers** blade.
-27.	On the **20777a-search-&lt;your name&gt;-&lt;the day&gt;** blade, click **Search explorer**. 
+27.	On the **20777a-search-\<your name\>-\<the day\>** blade, click **Search explorer**. 
 28.	On the **Search explorer** blade, in the **Query string** box, type **"missing from my index"** (including quotes), and then click **Search**. Observe that the new result is now returned.
-29.	In the left panel, click **All resources**, click **20777a-sql-&lt;your name&gt;-&lt;the day&gt;**, and then click **Data Explorer**.
+29.	In the left panel, click **All resources**, click **20777a-sql-\<your name\>-\<the day\>**, and then click **Data Explorer**.
 30.	In the **SQL API** pane, right-click **moviedata**, and then click **Delete collection**.
 31.	On the **Delete Collection** blade, in the **Confirm by typing the collection id** box, type **moviedata**, and then click **OK**.
 
@@ -229,8 +229,8 @@ This demonstration requires an **HDInsight cluster** to be created in Azure; thi
 4.	On the **New** blade, click **Analytics**, and then click **HDInsight**.
 5.	On the **HDInsight** blade, click **Custom (size, settings, apps)**.
 6.	On the **Basics** blade, type the following details, and then click **Cluster type**:
-    - **Cluster name**: hdi-&lt;your name&gt;&lt;date&gt;
-    - **Subscription**: &lt;your subscription&gt;
+    - **Cluster name**: hdi-\<your name\>\<date\>
+    - **Subscription**: \<your subscription\>
 7.	On the **Cluster configuration** blade, enter the following details, and then click **Select**:
     - **Cluster type**: Spark
     - **Version**: Spark 2.3.0 (HDI 3.6)
@@ -242,8 +242,8 @@ This demonstration requires an **HDInsight cluster** to be created in Azure; thi
     - **Resource group (use existing)**: 20777Mod06
     - **Location**: Select your region
 9.	On the **Storage** blade, under **Select a Storage account**, click **Create new**.
-10.	In the **Create a new Storage account** box, type **&lt;your name&gt;&lt;date&gt;sa**; point out that this name must be globally unique.
-11.	In the **Default container** box, replace the suggested name with **hdi-&lt;your name&gt;&lt;date&gt;**.
+10.	In the **Create a new Storage account** box, type **\<your name\>\<date\>sa**; point out that this name must be globally unique.
+11.	In the **Default container** box, replace the suggested name with **hdi-\<your name\>\<date\>**.
 12.	Leave all other settings at their defaults, and then click **Next**.
 13.	On the **Applications (optional)** blade, click **Next**.
 14.	On the **Cluster size** blade, in the **Number of Worker nodes** box, type **1**.
@@ -262,7 +262,7 @@ This demonstration requires an **HDInsight cluster** to be created in Azure; thi
 
 
 #### Task 2: Create a Cosmos DB collection
-1.	In the left panel, click **All resources**, click **20777a-sql-&lt;your name&gt;-&lt;the day&gt;**, and then click **Data Explorer**.
+1.	In the left panel, click **All resources**, click **20777a-sql-\<your name\>-\<the day\>**, and then click **Data Explorer**.
 2.	In the **SQL API** pane, click **New Database**.
 3.	On the **New Database** blade, in the **Database id** box, type **flightdelays**, and then click **OK**.
 4.	In the **SQL API** pane, click **New Collection**.
@@ -273,19 +273,19 @@ This demonstration requires an **HDInsight cluster** to be created in Azure; thi
 9.	On the **Add Collection** blade, click **Use existing**, and then in the drop-down list, click **flightdelays**.
 10.	In the **Collection Id** box, type **delaysbyselectedairline**.
 11.	In the **Throughput (400 - 10,000 RU/s)** box, type **1000**, and then click **OK**.
-12.	On the **20777a-sql-&lt;your name&gt;-&lt;the day&gt;** blade, under **SETTINGS**, click **Keys**.
+12.	On the **20777a-sql-\<your name\>-\<the day\>** blade, under **SETTINGS**, click **Keys**.
 13.	Make a note of the **PRIMARY CONNECTION STRING** value.
 14.	In File Explorer, go to **E:\Demofiles\Mod06\Demo02**, right-click **Demo02-setup.ps1**, and then click **Run with PowerShell**.
 15.	Right-click anywhere inside the PowerShell window to paste your primary connection string, and then press Enter.
 16.	Wait for the script to finish—it will take a couple of minutes.
 17.	Press Enter to close the PowerShell window.
-18.	On the **20777a-sql-&lt;your name&gt;-&lt;the day&gt;** blade, click **Data Explorer**.
+18.	On the **20777a-sql-\<your name\>-\<the day\>** blade, click **Data Explorer**.
 19.	In the **SQL API** pane, expand **delaydata**, and then click **Documents**.
 20.	On the **Documents** tab, observe that documents will appear.
 
 #### Task 3: Connect to the Spark cluster head node
-1.	In the left panel, click **All resources**, and then click **hdi-&lt;your name&gt;&lt;date&gt;**.
-2.	On the **hdi-&lt;your name&gt;&lt;date&gt;** blade, under **SETTINGS**, click **SSH + Cluster login**. 
+1.	In the left panel, click **All resources**, and then click **hdi-\<your name\>\<date\>**.
+2.	On the **hdi-\<your name\>\<date\>** blade, under **SETTINGS**, click **SSH + Cluster login**. 
 3.	On the **SSH + Cluster login** blade, in the **Hostname** drop-down list, click the name of your cluster (it should be the only entry), and then click the **Click to copy** button.
 4.	In File Explorer, go to the location where you saved **putty.exe** (C:\putty if you followed the instructions in the module prerequisites), and then double-click **putty.exe**.
 5.	In the **Open File - Security Warning** dialog box, clear the **Always ask before opening this file** check box, and then click **Run**.
@@ -314,7 +314,7 @@ If login is successful, you will be presented with a prompt that starts **sadmin
     import com.microsoft.azure.cosmosdb.spark._
     import com.microsoft.azure.cosmosdb.spark.config._
     ```
-3.	At the scala> prompt, type the following, and then press Enter. Replace **~URL~** with the **URL**, and replace **~Key~** with the **PRIMARY KEY** you noted earlier for the **20777a-sql-&lt;your name&gt;-&lt;the day&gt;** Cosmos DB instance.
+3.	At the scala> prompt, type the following, and then press Enter. Replace **~URL~** with the **URL**, and replace **~Key~** with the **PRIMARY KEY** you noted earlier for the **20777a-sql-\<your name\>-\<the day\>** Cosmos DB instance.
 
     ```
     val flightDatabaseConfig = Config(Map(
@@ -372,7 +372,7 @@ If login is successful, you will be presented with a prompt that starts **sadmin
     ```
     spark.sql("select sum(Distance) FROM c WHERE c.Cancelled = 1").show()
     ```
-8.	At the scala> prompt, type **:quit**, and then press Enter.
+8.	At the scala> prompt, type **:quit**, press Enter, and then press CTRL+C.
 9.	Leave your PuTTY session open for use in a later demonstration.
 
 ### Demo 2: Processing data in Cosmos DB with Spark
@@ -465,7 +465,7 @@ Downloading and installing the JDK and Eclipse might take some time. You might d
 
 19. On the **Edit** menu, click **Paste**.
 
-20. Edit the contents of the **Options.scala** file to replace **~URI~** with the **URI**, and replace **~KEY~** with the **PRIMARY KEY** values that you noted earlier for the  **20777a-sql-&lt;your name&gt;-&lt;the day&gt;** Cosmos DB instance
+20. Edit the contents of the **Options.scala** file to replace **~URI~** with the **URI**, and replace **~KEY~** with the **PRIMARY KEY** values that you noted earlier for the  **20777a-sql-\<your name\>-\<the day\>** Cosmos DB instance
     
 21. In Package Explorer, right-click **main**, point to **New**, and then click **Other**.
 
@@ -495,15 +495,15 @@ Downloading and installing the JDK and Eclipse might take some time. You might d
 
 #### Task 2: Upload the connector JAR file to HDInsight
 
-1.  In Internet Explorer, click **All resources**, and then click **hdi-&lt;your name&gt;&lt;date&gt;**.
+1.  In Internet Explorer, click **All resources**, and then click **hdi-\<your name\>\<date\>**.
 
-2.  On the **hdi-&lt;your name&gt;&lt;date&gt;** blade, under **PROPERTIES**, click **Storage accounts**.
+2.  On the **hdi-\<your name\>\<date\>** blade, under **PROPERTIES**, click **Storage accounts**.
 
-3.  On the **Storage accounts** blade, click **&lt;your name&gt;&lt;date&gt;sa**.
+3.  On the **Storage accounts** blade, click **\<your name\>\<date\>sa**.
 
-4.  On the **&lt;your name&gt;&lt;date&gt;sa** blade, under **BLOB SERVICE**, click **Blobs**, and then click **hdi-&lt;your name&gt;&lt;date&gt;**.
+4.  On the **\<your name\>\<date\>sa** blade, under **BLOB SERVICE**, click **Blobs**, and then click **hdi-\<your name\>\<date\>**.
 
-5.  On the **hdi-&lt;your name&gt;&lt;date&gt;** blade, click the **example** folder, click the **jars** folder, and then click **Upload**.
+5.  On the **hdi-\<your name\>\<date\>** blade, click the **example** folder, click the **jars** folder, and then click **Upload**.
 
 6.  In the **Upload blob** dialog box, click the folder icon.
 
@@ -529,7 +529,7 @@ Downloading and installing the JDK and Eclipse might take some time. You might d
 
 7.  In the **Spark Submission** dialog box, type the following values, and then click **Submit**:
 
-    - **Cluster Name**: hdi-&lt;your name&gt;&lt;date&gt; (Spark: 2.3)
+    - **Cluster Name**: hdi-\<your name\>\<date\> (Spark: 2.3)
 
     - **Referenced Jars**: wasb:///example/jars/azure-cosmosdb-spark\_2.3.0\_2.11-1.2.0-uber.jar
 
@@ -539,7 +539,7 @@ Downloading and installing the JDK and Eclipse might take some time. You might d
 
 #### Task 4: Review the outcome of the application
 
-1.  In Internet Explorer, click **All resources**, click **20777a-sql-&lt;your name&gt;-&lt;the day&gt;**, and then click **Data Explorer**.
+1.  In Internet Explorer, click **All resources**, click **20777a-sql-\<your name\>-\<the day\>**, and then click **Data Explorer**.
 
 2.  On the **Data Explorer** blade, expand **delaysbyselectedairline**, and then click **Documents**.
 
@@ -558,9 +558,9 @@ Downloading and installing the JDK and Eclipse might take some time. You might d
 
 7.  In the **Delete Collection** pane, in the **Confirm by typing the collection id** box, type **delaysbyselectedairline**, and then click **OK**.
 
-8.  In the left panel, click **All resources**, and click **hdi-&lt;your name&gt;&lt;date&gt;**.
+8.  In the left panel, click **All resources**, and click **hdi-\<your name\>\<date\>**.
 
-9.  On the **hdi-&lt;your name&gt;&lt;date&gt;** blade, in the **Cluster dashboards** section, click **Cluster dashboards**.
+9.  On the **hdi-\<your name\>\<date\>** blade, in the **Cluster dashboards** section, click **Cluster dashboards**.
 
 10. On the **Cluster Dashboards** blade, click **Spark History Server**.
 
@@ -588,9 +588,9 @@ Complete the previous demonstration in this module.
 
 #### Task 1: Create a PySpark Jupyter Notebook
 
-1.  In Internet Explorer, in the Azure portal, click **All resources**, and then click **hdi-&lt;your name&gt;&lt;date&gt;**.
+1.  In Internet Explorer, in the Azure portal, click **All resources**, and then click **hdi-\<your name\>\<date\>**.
 
-2.  On the **hdi-&lt;your name&gt;&lt;date&gt;** blade, under **Quick links**, click **Cluster dashboard**.
+2.  On the **hdi-\<your name\>\<date\>** blade, under **Quick links**, click **Cluster dashboard**.
 
 3.  On the **Cluster dashboards** blade, click **Jupyter Notebook**.
 
@@ -625,7 +625,7 @@ Complete the previous demonstration in this module.
 
 2.  On the **Insert** menu, click **Insert Cell Below**.
 
-3.  In the new cell, add the following code that configures the Cosmos DB Spark connector. Replace **--URI--** with the **URI**, and replace **--KEY--** with the **PRIMARY KEY** values that you noted earlier for the **20777a-sql-&lt;your name&gt;-&lt;the day&gt;** Cosmos DB account:
+3.  In the new cell, add the following code that configures the Cosmos DB Spark connector. Replace **--URI--** with the **URI**, and replace **--KEY--** with the **PRIMARY KEY** values that you noted earlier for the **20777a-sql-\<your name\>-\<the day\>** Cosmos DB account:
 
     ```
     host = '--URL--'
@@ -740,9 +740,9 @@ Complete the previous demonstration in this module.
 
     - **Data Source Name**: cosmos
 
-    - **Host**: The **URI** value that you noted earlier for the **20777a-sql-&lt;your name&gt;-&lt;the day&gt;** Cosmos DB account
+    - **Host**: The **URI** value that you noted earlier for the **20777a-sql-\<your name\>-\<the day\>** Cosmos DB account
 
-    - **Access Key**: The **PRIMARY KEY** value that you noted earlier for the **20777a-sql-&lt;your name&gt;-&lt;the day&gt;** Cosmos DB account
+    - **Access Key**: The **PRIMARY KEY** value that you noted earlier for the **20777a-sql-\<your name\>-\<the day\>** Cosmos DB account
 
 12.  In the **Schema Editor** window, click **Create New**.
 13.  In the **Generate Schema** dialog box, observe that the mapping method is **Collection**.
@@ -886,9 +886,9 @@ Complete the previous demonstration in this module.
     ```bash
     sudo hdfs dfs -get /example/jars/azure-cosmosdb-spark_2.3.0_2.11-1.2.0-uber.jar /usr/hdp/current/spark2-client/jars/ && exit
     ```
-10. In Internet Explorer, click **All resources**, and then click **hdi-&lt;your name&gt;&lt;date&gt;**.
+10. In Internet Explorer, click **All resources**, and then click **hdi-\<your name\>\<date\>**.
 
-11. On the **hdi-&lt;your name&gt;&lt;date&gt;** blade, click **Cluster dashboards**.
+11. On the **hdi-\<your name\>\<date\>** blade, click **Cluster dashboards**.
 
 12. On the **Cluster dashboards** blade, click **Ambari home**.
 
@@ -907,20 +907,20 @@ Complete the previous demonstration in this module.
     ```bash
     spark-shell --master yarn
     ```
-19. At the **scala&gt;** prompt, type the following, and then press Enter. Replace **~URI~** with the **URI**, and replace **~KEY~** with the **PRIMARY KEY** values that you noted earlier for the **20777a-sql-&lt;your name&gt;-&lt;the day&gt;** Cosmos DB instance.
+19. At the **scala\>** prompt, type the following, and then press Enter. Replace **~URI~** with the **URI**, and replace **~KEY~** with the **PRIMARY KEY** values that you noted earlier for the **20777a-sql-\<your name\>-\<the day\>** Cosmos DB instance.
 
     ```bash
     spark.sql("create table delaydata using com.microsoft.azure.cosmosdb.spark options (endpoint '~URL~', database 'flightdelays', collection 'delaydata', masterkey '~KEY~')")
     ```
 
-20. At the **scala&gt;** prompt, type the following, and then press Enter to verify that the table definition was created:
+20. At the **scala\>** prompt, type the following, and then press Enter to verify that the table definition was created:
 
     ```bash
     spark.sql("select UniqueCarrier from delaydata limit 10").show()
     ```
     > The results should include 10 values of the **UniqueCarrier** property.
 
-21. At the **scala&gt;** prompt, type **:quit**, and then press Enter to exit the Spark shell.
+21. At the **scala\>** prompt, type **:quit**, and then press Enter to exit the Spark shell.
     > **Note:**: If this fails to exit, press CTLR+C.
 
 22. At the PuTTY prompt, type **exit**, and then press Enter.
@@ -933,7 +933,7 @@ Complete the previous demonstration in this module.
 
 3.  In the **Get Data** dialog box, click **Azure**, click **Azure HDInsight Spark**, and then click **Connect**.
 
-4.  In the **Azure HDInsight Spark** dialog box, in the **Server** box, type **hdi-&lt;your name&gt;&lt;date&gt;.azurehdinsight.net**, click **DirectQuery**, and then click **OK**.
+4.  In the **Azure HDInsight Spark** dialog box, in the **Server** box, type **hdi-\<your name\>\<date\>.azurehdinsight.net**, click **DirectQuery**, and then click **OK**.
 
 5.  In the **Spark** dialog box, in the **User name** box, type **sparkadmin**.
 
@@ -953,7 +953,7 @@ Complete the previous demonstration in this module.
 
 #### Task 6: Show live data updates
 
-1.  In Internet Explorer, click **All resources**, click **20777a-sql-&lt;your name&gt;-&lt;the day&gt;**, and then click **Data Explorer**.
+1.  In Internet Explorer, click **All resources**, click **20777a-sql-\<your name\>-\<the day\>**, and then click **Data Explorer**.
 
 2.  In the **SQL API** pane, right-click **delaydata**, and then click **Delete Collection**.
 
@@ -969,7 +969,7 @@ Complete the previous demonstration in this module.
 
 8.  In Power BI, click **Refresh**. Observe that the bars disappear from the chart because the Cosmos DB collection is now empty.
 
-9.  In Internet Explorer, on the **20777a-sql-&lt;your name&gt;-&lt;the day&gt;** blade, under **SETTINGS**, click **Keys**.
+9.  In Internet Explorer, on the **20777a-sql-\<your name\>-\<the day\>** blade, under **SETTINGS**, click **Keys**.
 
 10. Make a note of the **PRIMARY CONNECTION STRING** value.
 
@@ -1001,7 +1001,7 @@ Complete the previous demonstration in this module.
 
 2.  On the **Everything** blade, click **Azure Databricks**, and then click **Create**.
 
-3.  On the **Azure Databricks Service** blade, in the **Workspace name** box, type **20777a-databricks-&lt;your name&gt;-&lt;the day&gt;**, for example, **20777a-databricks-john-31**.
+3.  On the **Azure Databricks Service** blade, in the **Workspace name** box, type **20777a-databricks-\<your name\>-\<the day\>**, for example, **20777a-databricks-john-31**.
 
 4.  In the **Resource group** box, click **Create new**, and then type **DatabricksGroup**.
 
@@ -1014,13 +1014,13 @@ Complete the previous demonstration in this module.
 
 #### Task 2: Create an Azure Databricks cluster
 
-1.  In the left panel, click **All resources**, and then click **20777a-databricks-&lt;your name&gt;-&lt;the day&gt;**.
+1.  In the left panel, click **All resources**, and then click **20777a-databricks-\<your name\>-\<the day\>**.
 
-2.  On the **20777a-databricks-&lt;your name&gt;-&lt;the day&gt;** blade, click **Launch Workspace**.
+2.  On the **20777a-databricks-\<your name\>-\<the day\>** blade, click **Launch Workspace**.
 
 3.  On the **Azure Databricks** page, under **Common Tasks**, click **New Cluster**.
 
-4.  On the **New Cluster** page, in the **Cluster Name** box, type **&lt;your name&gt;-cluster**.
+4.  On the **New Cluster** page, in the **Cluster Name** box, type **\<your name\>-cluster**.
 
 5.  In the **Max Workers** box, type **4**.
 
@@ -1038,7 +1038,7 @@ Complete the previous demonstration in this module.
 
 4.  In the **PyPi Name** box, type **pydocumentdb**, and then click **Install Library**.
 
-5.  On the **pydocumentdb** page, in the **&lt;your name&gt;-cluster** row, select the **Attach** check box, and wait until the status changes to **Attached**.
+5.  On the **pydocumentdb** page, in the **\<your name\>-cluster** row, select the **Attach** check box, and wait until the status changes to **Attached**.
 
 6.  In the toolbar on the left of the blade, click **Azure Databricks**.
 
@@ -1046,7 +1046,7 @@ Complete the previous demonstration in this module.
 
 8.  In the **Create Notebook** dialog box, in the **Name** box, type **FlightDelaysAnalysis**.
 
-9.  In the **Language** drop-down list, click **Python**, click **&lt;your name&gt;-cluster**, and then click **Create**.
+9.  In the **Language** drop-down list, click **Python**, click **\<your name\>-cluster**, and then click **Create**.
 
 #### Task 4: Retrieve data from Cosmos DB using PySpark
 
@@ -1062,7 +1062,7 @@ Complete the previous demonstration in this module.
     ```
 2.  In the toolbar at the top right-hand side of the cell, on the **Edit Menu** menu, click **Add Cell Below**.
 
-3.  Add the following code to the new cell. This code uses the pydocumentdb library to create a client object that can connect to your Cosmos DB account. Replace **--URI--** with the **URI**, and replace **--KEY--** with the **PRIMARY KEY** values that you noted earlier for the **20777a-sql-&lt;your name&gt;-&lt;the day&gt;** Cosmos DB account.
+3.  Add the following code to the new cell. This code uses the pydocumentdb library to create a client object that can connect to your Cosmos DB account. Replace **--URI--** with the **URI**, and replace **--KEY--** with the **PRIMARY KEY** values that you noted earlier for the **20777a-sql-\<your name\>-\<the day\>** Cosmos DB account.
 
     ```python
     connectionPolicy = documents.ConnectionPolicy()
