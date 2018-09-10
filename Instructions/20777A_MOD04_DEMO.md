@@ -128,9 +128,9 @@ Before starting this demo:
 7. In Solution Explorer, click **App.config**.
 
 8. On the **App.config** tab, enter the values for the following settings:
-    - **EndpointUrl**. Replace **~URI~** with the **URI** you noted earlier from the **20777a-sql-\<your name\>-\<the day\>** Cosmos DB account.
+    - **EndpointUrl**. Replace **\~URI\~** with the **URI** you noted earlier from the **20777a-sql-\<your name\>-\<the day\>** Cosmos DB account.
 
-    - **PrimaryKey**. Replace **~ PRIMARY KEY~** with the **PRIMARY KEY** you noted earlier from the**20777a-sql-\<your name\>-\<the day\>** Cosmos DB account.
+    - **PrimaryKey**. Replace **\~ PRIMARY KEY\~** with the **PRIMARY KEY** you noted earlier from the**20777a-sql-\<your name\>-\<the day\>** Cosmos DB account.
 
     - **Database**. Leave this set to **TestDatabase**, unless you created a database with a different name in Task 1.
 
@@ -239,9 +239,9 @@ Before starting this demo:
 
 8.  On the **App.config** tab, enter the values for the following settings:
     
-    - **EndpointUrl**. Replace **~URI~** with the **URI** you noted earlier from the **20777a-sql-\<your name\>-\<the day\>** Cosmos DB account.
+    - **EndpointUrl**. Replace **\~URI\~** with the **URI** you noted earlier from the **20777a-sql-\<your name\>-\<the day\>** Cosmos DB account.
 
-    - **PrimaryKey**. Replace **~ PRIMARY KEY~** with the **PRIMARY KEY** you noted earlier from the**20777a-sql-\<your name\>-\<the day\>** Cosmos DB account.
+    - **PrimaryKey**. Replace **\~ PRIMARY KEY\~** with the **PRIMARY KEY** you noted earlier from the**20777a-sql-\<your name\>-\<the day\>** Cosmos DB account.
 
     - **Database**. Leave this set to **TestDatabase**.
 
@@ -582,9 +582,9 @@ Before starting this demo:
 
 10. On the **App.config** tab, enter the values for the following settings:
     
-    - **EndpointUrl**. Replace **~URI~** with the **URI** you noted earlier from the **20777a-sql-\<your name\>-\<the day\>** Cosmos DB account.
+    - **EndpointUrl**. Replace **\~URI\~** with the **URI** you noted earlier from the **20777a-sql-\<your name\>-\<the day\>** Cosmos DB account.
 
-    - **PrimaryKey**. Replace **~ PRIMARY KEY~** with the **PRIMARY KEY** you noted earlier from the**20777a-sql-\<your name\>-\<the day\>** Cosmos DB account.
+    - **PrimaryKey**. Replace **\~ PRIMARY KEY\~** with the **PRIMARY KEY** you noted earlier from the**20777a-sql-\<your name\>-\<the day\>** Cosmos DB account.
 
     - **Database**. Leave this set to **Cricket**.
 
@@ -1290,9 +1290,9 @@ Before starting this demo:
 8.  In Solution Explorer, click **App.config**.
 
 9.  On the **App.config** tab, enter the values for the following settings: 
-    - **EndpointUrl**. Replace **~URI~** with the **URI** you noted earlier from the **20777a-sql-\<your name\>-\<the day\>** Cosmos DB account.
+    - **EndpointUrl**. Replace **\~URI\~** with the **URI** you noted earlier from the **20777a-sql-\<your name\>-\<the day\>** Cosmos DB account.
 
-    - **PrimaryKey**. Replace **~ PRIMARY KEY~** with the **PRIMARY KEY** you noted earlier from the**20777a-sql-\<your name\>-\<the day\>** Cosmos DB account.
+    - **PrimaryKey**. Replace **\~PRIMARY KEY\~** with the **PRIMARY KEY** you noted earlier from the**20777a-sql-\<your name\>-\<the day\>** Cosmos DB account.
 
     - **Database**. Leave this set to **Cricket**.
 
