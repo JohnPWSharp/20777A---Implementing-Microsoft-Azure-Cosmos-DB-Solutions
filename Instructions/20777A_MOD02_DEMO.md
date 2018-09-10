@@ -886,7 +886,9 @@ You need to have completed the previous demonstration before following these ste
 
 13. Because the document was deleted, the application will return an error message beginning:
 
-`Message:`` ``{"Errors``":[``"Resource Not Found"]}`
+```
+Message: {"Errors":["Resource Not Found"]}
+```
 
 14. In Internet Explorer, in the **SQL API** pane, expand **Temperatures**, and then click **Documents**.
 
