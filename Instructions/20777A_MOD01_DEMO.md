@@ -1050,7 +1050,7 @@ SQL API Cosmos DB database.
 
 #### Task 3: Explain how it works
 
-1.  Depending on if you have time, walk through the code.
+1.  If you have time, walk through the code.
 2.  The multithreaded client approach is implemented by the
     `DelayDataUploadDriver` and `DelayDataUploader` classes. The
     `DelayDataUploadDriver` class creates an instance of the
