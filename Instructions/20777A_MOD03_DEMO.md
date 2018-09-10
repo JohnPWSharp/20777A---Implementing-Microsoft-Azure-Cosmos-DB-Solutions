@@ -20,7 +20,7 @@
                   - [Task 2: Test the Stored Procedure Azure DocumentDB Studio](#task-2-test-the-stored-procedure-azure-documentdb-studio)
                   - [Task 3: Invoke the Trigger From a SQL API Application](#task-3-invoke-the-trigger-from-a-sql-api-application)
                   - [Task 4: Delete the Azure resources](#task-4-delete-the-azure-resources)
-
+  
 ## Lesson 1: Server-Side Programming with Cosmos DB
 
 ### Demo 1: Creating and Testing a User-Defined Function
