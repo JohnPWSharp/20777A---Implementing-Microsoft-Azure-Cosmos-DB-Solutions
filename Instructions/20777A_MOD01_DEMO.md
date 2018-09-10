@@ -61,31 +61,30 @@ Before starting this demo:
 
 #### Task 1: Create a SQL API account, database, and collection
 
-1.  In the Azure portal, in the left panel, click **Azure Cosmos DB**,
+1. In the Azure portal, in the left panel, click **Azure Cosmos DB**,
     and then click **+ Add**.
-2.  On the **Azure Cosmos DB** blade, in the **ID** box, type
+2. On the **Azure Cosmos DB** blade, in the **ID** box, type
     **20777a-sql-\<your name\>-\<the day\>**, for example,
     **20777a-sql-john-10**.
-3.  In the **API** drop-down list, note the options available, and then
+3. In the **API** drop-down list, note the options available, and then
     click **SQL**.
-4.  In the **Resource Group** box, type **20777aMod1**.
-5.  In the **Location** drop-down list, click the region closest to your
-    current location.
-6.  Select the **Pin to dashboard** check box, and then click
+4. In the **Resource Group** box, type **20777aMod1**.
+5. In the **Location** drop-down list, click the region closest to your
+    current location, and then click
     **Create**.
-7.  Wait for the Azure Cosmos DB to be created—this could take a few
-    minutes.
-8.  On the **Azure Cosmos DB** blade, click **20777a-sql-\<your
+6. Wait for the Azure Cosmos DB to be created—this could take a few
+    minutes.    
+7. On the **Azure Cosmos DB** blade, click **20777a-sql-\<your
     name\>-\<the day\>**, and then click **Data Explorer**.
-9.  In the **SQL API** pane, click **New Database**.
-10. On the **New** **Database** blade, in the **Database id** box, type
+8. In the **SQL API** pane, click **New Database**.
+9.  On the **New** **Database** blade, in the **Database id** box, type
     **Personnel**, and then click **OK**.
-11. In the **SQL API** pane, click **New Collection**.
-12. On the **Add Collection** blade, under **Database id**, click **Use
+10. In the **SQL API** pane, click **New Collection**.
+11. On the **Add Collection** blade, under **Database id**, click **Use
     existing**.
-13. In the **Choose an existing database** drop-down list, click
+12. In the **Choose an existing database** drop-down list, click
     **Personnel**.
-14. In the **Collection Id** box, type **Employees**, and then click
+13. In the **Collection Id** box, type **Employees**, and then click
     **OK**.
 
 #### Task 2: Add Sample Documents to the Collection
@@ -357,26 +356,25 @@ Before starting this demo:
 5.  Under **Resource Group**, click **Use existing**, and then in the
     drop-down list, click **20777aMod1**.
 6.  In the **Location** drop-down list, click the region closest to your
-    current location.
-7.  Select the **Pin to dashboard** check box, and then click
+    current location, and then click
     **Create**.
-8.  Wait for the Azure Cosmos DB to be created—this might take a few
-    minutes.
-9.  On the **Azure Cosmos DB** blade, click **20777a-mongo-\<your
+7.  Wait for the Azure Cosmos DB to be created—this might take a few
+    minutes.    
+8.  On the **Azure Cosmos DB** blade, click **20777a-mongo-\<your
     name\>-\<the day\>**, and then click **Data Explorer**.
-10. On the **MONGODB API** blade, click **New Database**.
-11. On the **New Database** blade, in the **Database id** box, type
+9.  On the **MONGODB API** blade, click **New Database**.
+10. On the **New Database** blade, in the **Database id** box, type
     **DeviceData**, and then click **OK**.
-12. On the **MONGODB API** blade, click **New Collection**.
-13. On the **Add Collection** blade, under **Database id**, click **Use
+11. On the **MONGODB API** blade, click **New Collection**.
+12. On the **Add Collection** blade, under **Database id**, click **Use
     existing**.
-14. In the **Choose an existing database** drop-down list, click
+13. In the **Choose an existing database** drop-down list, click
     **DeviceData**.
-15. In the **Collection Id** box, type **Temperatures**.
-16. In the **Throughput** box, change **1000** to **5000**, and then
+14. In the **Collection Id** box, type **Temperatures**.
+15. In the **Throughput** box, change **1000** to **5000**, and then
     click **OK**.
-17. In the left pane, under **SETTINGS**, click **Connection String**.
-18. Make a note of the following values:
+16. In the left pane, under **SETTINGS**, click **Connection String**.
+17. Make a note of the following values:
 
     ```
     HOST
@@ -384,8 +382,8 @@ Before starting this demo:
     USERNAME
     PRIMARY PASSWORD
     ```
-19. On the Start menu, type **cmd**, and then press Enter.
-20. At the command prompt, enter the following code:
+18. On the Start menu, type **cmd**, and then press Enter.
+19. At the command prompt, enter the following code:
     
     ```DOS
     E:
@@ -599,24 +597,23 @@ of the records in the database.**
 4.  Under **Resource group**, click **Use existing**, and then in the
     drop-down list, click **20777aMod1**.
 5.  In the **Location** drop-down list, click the region closest to your
-    current location.
-6.  Select the **Pin to dashboard** check box, and then click
+    current location, and then click
     **Create**.
-7.  Wait for the Azure Cosmos DB to be created—this could take a few
+6.  Wait for the Azure Cosmos DB to be created—this could take a few
     minutes.
-8.  On the **Azure Cosmos DB** blade, click **20777a-table-api-\<your
+7.  On the **Azure Cosmos DB** blade, click **20777a-table-api-\<your
     name\>-\<the day\>**, click **Data Explorer**, and then click **New
     Table**.
-9.  On the **Add Table** blade, in the **Table Id** box, type
+8.  On the **Add Table** blade, in the **Table Id** box, type
     **CriminalRecords**.
-10. Change the **Throughput** value to **5000**, and then click **OK**.
-11. In the left pane, under **SETTINGS**, click **Connection String**.
-12. Make a note of the **PRIMARY CONNECTION STRING** value.
-13. On the Start menu, type **cmd**, and then press Enter.
-14. At the command prompt, run the following commands, replacing the
+9.  Change the **Throughput** value to **5000**, and then click **OK**.
+10. In the left pane, under **SETTINGS**, click **Connection String**.
+11. Make a note of the **PRIMARY CONNECTION STRING** value.
+12. On the Start menu, type **cmd**, and then press Enter.
+13. At the command prompt, run the following commands, replacing the
     **\<Table Storage Connection string\>** with the **key1**
     **Connection string**, and **\<Cosmos DB PRIMARY CONNECTION
-    STRING\>**` `with the **PRIMARY CONNECTION STRING** values you noted
+    STRING\>** with the **PRIMARY CONNECTION STRING** values you noted
     earlier:
 
     ```DOS
@@ -756,7 +753,7 @@ Before starting this demo:
     **Documents**.
 2.  Explore the data by clicking on different documents.
 3.  On the **MONGODB API** blade, click **New Query**.
-4.  On the **Query 1** tab, type `{}`, and then click **Execute Query**.
+4.  On the **Query 1** tab, type **{}**, and then click **Execute Query**.
 5.  Note that the same data is displayed.
 6.  Close all open windows, but keep the Azure portal open for the next
     demo.

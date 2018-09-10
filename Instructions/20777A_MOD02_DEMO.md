@@ -60,27 +60,25 @@ Before starting this demo:
 
 4.  In the **Resource Group** box, type **20777aMod2**.
 
-5.  In the **Location** drop-down list, click the region closest to your current location.
+5.  In the **Location** drop-down list, click the region closest to your current location, and then click **Create**.
 
-6.  Select the **Pin to dashboard** check box, and then click **Create**.
+6.  Wait for the Azure Cosmos DB to be created—this could take a few minutes.
 
-7.  Wait for the Azure Cosmos DB to be created—this could take a few minutes.
+7.  On the **Azure Cosmos DB** blade, click **Refresh**, and then click **20777a-sql-\<your name\>-\<the day\>**.
 
-8.  On the **Azure Cosmos DB** blade, click **Refresh**, and then click **20777a-sql-\<your name\>-\<the day\>**.
+8.  On the **20777a-sql-\<your name\>-\<the day\>** blade, click **Data Explorer**, and then click **New Database**.
 
-9.  On the **20777a-sql-\<your name\>-\<the day\>** blade, click **Data Explorer**, and then click **New Database**.
+9.  On the **New Database** blade, in the **Database id** box, type **DeviceData**, and then click **OK**.
 
-10. On the **New Database** blade, in the **Database id** box, type **DeviceData**, and then click **OK**.
+10. On the **20777a-sql-\<your name\>-\<the day\>** blade, click **New Collection**.
 
-11. On the **20777a-sql-\<your name\>-\<the day\>** blade, click **New Collection**.
+11. On the **Add Collection** blade, click **Use existing**, and then in the drop-down list, click **DeviceData**.
 
-12. On the **Add Collection** blade, click **Use existing**, and then in the drop-down list, click **DeviceData**.
+12. In the **Collection Id** box, type **Temperatures**.
 
-13. In the **Collection Id** box, type **Temperatures**.
+13. Under **Storage capacity**, click **Unlimited**.
 
-14. Under **Storage capacity**, click **Unlimited**.
-
-15. In the **Partition key** box, type **/deviceID**.
+14. In the **Partition key** box, type **/deviceID**.
 
 **Note**: Cosmos DB is case sensitive; the case of the partitioning key must match the case of the property in your documents.
 

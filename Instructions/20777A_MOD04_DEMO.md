@@ -49,38 +49,36 @@ Before starting this demo:
 
 9.  In the **Resource Group** box, type **20777aMod4**.
 
-10. In the **Location** drop-down list, click a region closest to your current location.
+10. In the **Location** drop-down list, click a region closest to your current location, and then click **Create**.
 
-11. Select the **Pin to dashboard** check box, and then click **Create**.
+11. Wait for the Azure Cosmos DB to be created—this could take a few minutes.
 
-12. Wait for the Azure Cosmos DB to be created—this could take a few minutes.
+12. On the **Azure Cosmos DB** blade, click **Refresh**, and then click **20777a-sql-\<your name\>-\<the day\>**.
 
-13. On the **Azure Cosmos DB** blade, click **Refresh**, and then click **20777a-sql-\<your name\>-\<the day\>**.
+13. On the **20777a-sql-\<your name\>-\<the day\>** blade, under **SETTINGS**, click **Replicate data globally**, and then click **Add new region**.
+14. On the **Replicate data globally** blade, in the **Search for a region** drop-down list, click a region that is on a different continent, and then click **OK**.
+15. On the **Replicate data globally** blade, click **Save**. Wait until the process is complete, this can take upto 5 minutes.  
+16. On the **20777a-sql-\<your name\>-\<the day\>** blade, click **Data Explorer**, and then click **New Database**.
 
-14. On the **20777a-sql-\<your name\>-\<the day\>** blade, under **SETTINGS**, click **Replicate data globally**, and then click **Add new region**.
-15. On the **Replicate data globally** blade, in the **Search for a region** drop-down list, click a region that is on a different continent, and then click **OK**.
-16. On the **Replicate data globally** blade, click **Save**. Wait until the process is complete, this can take upto 5 minutes.  
-17. On the **20777a-sql-\<your name\>-\<the day\>** blade, click **Data Explorer**, and then click **New Database**.
+17. On the **New Database** blade, in the **Database id** box, type **DeviceData**, and then click **OK**.
 
-18. On the **New Database** blade, in the **Database id** box, type **DeviceData**, and then click **OK**.
+18. In the **SQL API** pane, click **New Collection**.
 
-19. In the **SQL API** pane, click **New Collection**.
+19. On the **Add Collection** blade, under **Database id**, click **Use existing**, and then in the drop-down list, click **DeviceData**.
 
-20. On the **Add Collection** blade, under **Database id**, click **Use existing**, and then in the drop-down list, click **DeviceData**.
-
-21. In the **Collection Id** box, type **Temperatures**, and then click **OK**.
+20. In the **Collection Id** box, type **Temperatures**, and then click **OK**.
 
     > **Note**: preparation steps 19 to 21 download and build the latest version of the Cosmos DB data migration tool. You do not need to carry out these step if you completed it in an earlier module (and already have a **E:\\dmt** folder on **20777A-LON-DEV**); if you already completed these steps, skip ahead to step 22.
 
-22. On the toolbar, click **File Explorer**.
+21. On the toolbar, click **File Explorer**.
 
-23. In File Explorer, navigate to **E:\\Resources**, right-click **build\_data\_migration\_tool.ps1**, and then click **Run with PowerShell**.
+22. In File Explorer, navigate to **E:\\Resources**, right-click **build\_data\_migration\_tool.ps1**, and then click **Run with PowerShell**.
 
-24. Wait for the script to finish, and then press Enter.
+23. Wait for the script to finish, and then press Enter.
 
-25. In Internet Explorer, on the **20777a-sql-\<your name\>-\<the day\>** blade, under **SETTINGS**, click **Keys**.
+24. In Internet Explorer, on the **20777a-sql-\<your name\>-\<the day\>** blade, under **SETTINGS**, click **Keys**.
 
-26. Make a note of the **URI**, and **PRIMARY KEY** values.
+25. Make a note of the **URI**, and **PRIMARY KEY** values.
 
 #### Task 1: Configure the Cosmos DB Account and Database
 

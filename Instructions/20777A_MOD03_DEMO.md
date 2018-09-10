@@ -49,23 +49,21 @@ Before starting this demo:
 
 7.  In the **Resource Group** box, type **20777aMod3**.
 
-8.  In the **Location** drop-down list, click the region closest to your current location.
+8.  In the **Location** drop-down list, click the region closest to your current location, and then click **Create**.
 
-9.  Select the **Pin to dashboard** check box, and then click **Create**.
+9.  Wait for the Azure Cosmos DB to be created—this could take a few minutes.
 
-10. Wait for the Azure Cosmos DB to be created—this could take a few minutes.
+10. On the **Azure Cosmos DB** blade, click **Refresh**, and then click **20777a-sql-\<your name\>-\<the day\>**.
 
-11. On the **Azure Cosmos DB** blade, click **Refresh**, and then click **20777a-sql-\<your name\>-\<the day\>**.
+11. On the **20777a-sql-\<your name\>-\<the day\>** blade, click **Data Explorer**, and then click **New Database**.
 
-12. On the **20777a-sql-\<your name\>-\<the day\>** blade, click **Data Explorer**, and then click **New Database**.
+12. On the **New Database** blade, in the **Database id** box, type **DeviceData**, and then click **OK**.
 
-13. On the **New Database** blade, in the **Database id** box, type **DeviceData**, and then click **OK**.
+13. In the **SQL API** pane, click **New Collection**.
 
-14. In the **SQL API** pane, click **New Collection**.
+14. On the **Add Collection** blade, click **Use existing**, and then in the drop-down list, click **DeviceData**.
 
-15. On the **Add Collection** blade, click **Use existing**, and then in the drop-down list, click **DeviceData**.
-
-16. In the **Collection Id** box, type **Temperatures**, and then click **OK**.
+15. In the **Collection Id** box, type **Temperatures**, and then click **OK**.
 
 > **Note**: preparation steps 17 and 18 downloads and builds the latest version of the Cosmos DB data migration tool. You do not need to carry out these steps if you completed it in an earlier module (and already have a **E:\\dmt\\bin** folder on **20777A-LON-DEV**); if you already completed these steps, skip ahead to step 19.
 
