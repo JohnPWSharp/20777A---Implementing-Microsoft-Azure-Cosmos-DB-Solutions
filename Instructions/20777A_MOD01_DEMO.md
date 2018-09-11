@@ -148,11 +148,11 @@ Before starting this demo:
     ```SQL
     SELECT * FROM Employees e
     ```
-3.  On the Query 1 tab, click Execute Query.
+3.  On the Query 1 tab, click **Execute Query**.
 
-> Note: there are two results that are returned as a JSON document.
-> Explain the structure of the JSON document, highlighting the extra
-> system properties that are added by Cosmos DB.
+    > **Note:** there are two results that are returned as a JSON document.
+    > Explain the structure of the JSON document, highlighting the extra
+    > system properties that are added by Cosmos DB.
 
 4.  In the **SQL API** pane, click **New SQL Query**.
 5.  On the **Query 2** tab, replace the following text:
@@ -168,9 +168,9 @@ Before starting this demo:
     ```
 6.  On the **Query 2** tab, click **Execute Query**.
 
-> Note: only the employeeNumber field has been returned for the two
-> records. Also note that the **Request Charge** is less than the first
-> query.
+    > **Note:** only the employeeNumber field has been returned for the two
+    > records. Also note that the **Request Charge** is less than the first
+    > query.
 
 7.  In the **SQL API** pane, click **New SQL Query**.
 8.  On the **Query 3** tab, replace the following text:
@@ -186,8 +186,8 @@ Before starting this demo:
     ```
 9. On the **Query 3** tab, click **Execute Query**.
 
-> Note: the JSON document has returned the child elements of the name
-> from the Employees collection.
+    > **Note:** the JSON document has returned the child elements of the name
+    > from the Employees collection.
 
 10. In the **SQL API** pane, click **New SQL Query**.
 11. On the **Query 4** tab, replace the following text:
@@ -203,8 +203,8 @@ Before starting this demo:
     ```
 12. On the **Query 4** tab, click **Execute Query**.
 
-> Note: you can traverse the JSON document to return the data you need,
-> at any level in the document.
+    > **Note:** you can traverse the JSON document to return the data you need,
+    > at any level in the document.
 
 13. In the **SQL API** pane, click **New SQL Query**.
 14. On the **Query 5** tab, replace the following text:
@@ -220,11 +220,11 @@ Before starting this demo:
     ```
 15. On the **Query 5** tab, click **Execute Query**.
 
-> Note: Cosmos DB is a NoSQL database, it has no schema. Therefore, a
-> query can't be syntax checked for column names, as it could if this
-> was an RDBMS. Therefore, the above query doesn't return any error
-> because firstname doesn't exist—the property is actually called
-> firstName.
+    > **Note:** Cosmos DB is a NoSQL database, it has no schema. Therefore, a
+    > query can't be syntax checked for column names, as it could if this
+    > was an RDBMS. Therefore, the above query doesn't return any error
+    > because firstname doesn't exist—the property is actually called
+    > firstName.
 
 16. Close all open windows, but keep the Azure portal open for the next
     demo.
@@ -318,9 +318,9 @@ Before starting this demo:
 
 #### Task 1: Show the sample app connecting to a local MongoDB database
 
-> Scenario: you need to capture temperature data from a series of
-> devices and store this information as a set of documents in a local
-> MongoDB.
+**Scenario:** you need to capture temperature data from a series of
+devices and store this information as a set of documents in a local
+MongoDB.
 
 1.  On the Start menu, click **Visual Studio 2017**.
 2.  In Visual Studio 2017, on the **File** menu, point to **Open**, then
@@ -341,7 +341,7 @@ Before starting this demo:
     db.Temperatures.find();
     db.Temperatures.count();
     ```
-> Note the content and number of documents that have been created.
+    > Note the content and number of documents that have been created.
 
 #### Task 2: Copy the data from MongoDB into a MongoDB API database
 
@@ -390,10 +390,10 @@ Before starting this demo:
     cd \
     "C:\Program Files\MongoDB\Server\3.6\bin\mongodump" --db DeviceData --collection Temperatures --out Data -u "deviceadmin" -p "Pa55w.rd"
     ```
-> Note: this command creates a backup of the Temperatures collection
-> (Temperatures.bson) in the E:\\Data\\DeviceData folder.
+    > **Note:** this command creates a backup of the Temperatures collection
+    > (Temperatures.bson) in the E:\\Data\\DeviceData folder.
 
-21. At the command prompt, enter the following code to import the data
+20. At the command prompt, enter the following code to import the data
     into the MongoDB API database (replace **HOST**, **PORT**,
     **USERNAME**, and **PRIMARYPASSWORD** with the values recorded when
     you created the Cosmos DB
@@ -402,17 +402,17 @@ Before starting this demo:
     ```DOS
     "C:\Program Files\MongoDB\Server\3.6\bin\mongorestore" --host HOST --port PORT -u USERNAME -p PRIMARYPASSWORD --db DeviceData --collection Temperatures --ssl --sslAllowInvalidCertificates E:\Data\DeviceData\Temperatures.bson
     ```
-22. Wait until the restore is complete.
-23. In Internet Explorer, in the Azure portal, in the left pane, click
+21. Wait until the restore is complete.
+22. In Internet Explorer, in the Azure portal, in the left pane, click
     **Data Explorer**.
-24. On the **MONGODB API** blade, expand **DeviceData**, right-click
+23. On the **MONGODB API** blade, expand **DeviceData**, right-click
     **Temperatures**, and then click **New Shell**.
-25. On the **Shell 1** tab, at the `>` prompt, type
+24. On the **Shell 1** tab, at the `>` prompt, type
     **db.Temperatures.count()**, and then press Enter.
 
-> Note: the shell returns the RUs consumed in performing the query. The
-> number of documents should match the number on the local MongoDB
-> database.
+    > **Note:** the shell returns the RUs consumed in performing the query. The
+    > number of documents should match the number on the local MongoDB
+    > database.
 
 #### Task 3: Copy the data from the MongoDB into a SQL API database
 
@@ -476,9 +476,9 @@ Before starting this demo:
 31. In the **Partition Key** box, type **deviceID**.
 32. In the **Id Field** box, type **\_id**, and then click **Next**.
 
-> Note: when you specify an Id field, this significantly speeds up the
-> import, because Cosmos DB doesn't have to create a unique key for each
-> document it's creating.
+    > **Note:** when you specify an Id field, this significantly speeds up the
+    > import, because Cosmos DB doesn't have to create a unique key for each
+    > document it's creating.
 
 33. On the **Advanced** page, click **Next**.
 34. On the **Summary** page, click **Import**.
@@ -501,8 +501,8 @@ Before starting this demo:
     ```
 39. On the **Query 1** tab, click **Execute Query**.
 
-> Note: the number of documents returned should match the number in the
-> local MongoDB and the Azure Cosmos DB with the Mongo API.
+    > **Note:** the number of documents returned should match the number in the
+    > local MongoDB and the Azure Cosmos DB with the Mongo API.
 
 40. In Visual Studio 2017, in the **DataTransfer** instance, on the
     **Debug** menu, click **Stop Debugging**.
@@ -566,9 +566,9 @@ Before starting this demo:
 
 #### Task 1: Show the data in Azure Table storage
 
-**Scenario: There's a small database containing the details of criminals
+**Scenario:** There's a small database containing the details of criminals
 and the offenses they have committed. Use Visual Studio to examine some
-of the records in the database.**
+of the records in the database.
 
 1.  In Visual Studio 2017, on the **View** menu, click **Cloud
     Explorer**.
@@ -583,8 +583,8 @@ of the records in the database.**
     expand **20777a**, expand **Tables**, and then double-click
     **CriminalRecords**.
 
-> Note: 100 records are shown in a table view, it might be easier to
-> reorder by RowKey.
+    > **Note:** 100 records are shown in a table view, it might be easier to
+    > reorder by RowKey.
 
 #### Task 2: Move the data from Table storage into a Table API database in Cosmos DB
 
@@ -621,8 +621,8 @@ of the records in the database.**
     cd "E:\dmt\bin\dt"
     dt /s:AzureTable /s.ConnectionString:"<Table  Connection string>" /s.Table:CriminalRecords /t:TableAPIBulk /t.ConnectionString:"<Cosmos DB PRIMARY CONNECTION STRING>" /t.TableName:CriminalRecords
     ```
-> Note: the tool will report the number of records transferred—this
-> should match the 100 created in the earlier steps.
+    > **Note:** the tool will report the number of records transferred—this
+    > should match the 100 created in the earlier steps.
 
 #### Task 3: Verify the data in Cosmos DB
 
@@ -812,9 +812,9 @@ API database.
 7.  In the **ListOffences.exe** window, type **q**, and then press
     Enter.
 
-> Note: that the application works in exactly the same way, the only
-> change to code was the connection string. Data is now being retrieved
-> from your Azure Cosmos DB database with a Table API.
+    > **Note:** that the application works in exactly the same way, the only
+    > change to code was the connection string. Data is now being retrieved
+    > from your Azure Cosmos DB database with a Table API.
 
 8.  Close all open windows, but keep the Azure portal open for the next
     demo.
@@ -834,13 +834,12 @@ DeviceData loaded with temperature data.
     database.
 3.  In the left pane, under **SETTINGS**, click **Keys**.
 4.  Make a note of the **URI** and **PRIMARY KEY** values for later in
-    this
-demonstration.
+    this demonstration.
 
 #### Task 1: Show the sample application that performs queries against the SQL API database
 
-**Scenario: Examine a .NET application to connect and read data from a
-SQL API database.**
+**Scenario:** Examine a .NET application to connect and read data from a
+SQL API database.
 
 1.  On the Start menu, click **Visual Studio 2017**.
 2.  In Visual Studio 2017, on the **File** menu, point to **Open**, and
@@ -866,29 +865,29 @@ SQL API database.**
     using Microsoft.Azure.Documents;
     using Microsoft.Azure.Documents.Client;
     ```
-12. Explain that these namespaces contain the types required to connect
+11. Explain that these namespaces contain the types required to connect
     to a SQL API account and perform queries.
-13. On the **Tools** menu, point to **NuGet Package Manager**, and then
+12. On the **Tools** menu, point to **NuGet Package Manager**, and then
     click **Manage NuGet Packages for Solution**.
-14. On the **NuGet - Solution** tab, click **Installed**.
-15. Point out that the **Microsoft.Azure.DocumentDB.Core** package
+13. On the **NuGet - Solution** tab, click **Installed**.
+14. Point out that the **Microsoft.Azure.DocumentDB.Core** package
     provides the library that implements the client-side API. The
     remaining packages contain the libraries on which this package
     depends (they are located and loaded automatically by the NuGet
     Package Manager).
-16. On the **Program.cs** tab, in the **DoWork** task, highlight the
+15. On the **Program.cs** tab, in the **DoWork** task, highlight the
     following statement:
 
     ```C#
     // Connect to the Cosmos DB account
     this.client = new DocumentClient(new Uri(endpointUrl), primaryKey);
     ```
-17. Explain that a **DocumentClient** object represents a connection to
+16. Explain that a **DocumentClient** object represents a connection to
     the Cosmos DB account. All requests to the account have to pass
     through a **DocumentClient** object. The constructor expects the
     **URL** and **PRIMARY KEY** of the Cosmos DB account.
 
-18. Highlight the following block of
+17. Highlight the following block of
     code:
 
     ```C#
@@ -906,20 +905,20 @@ SQL API database.**
     
     var documentResponse = await client.ReadDocumentAsync<ThermometerReading>(docUri, options);
     ```
-19. Explain that:
-  - The ReadDocumentAsync method provides the fastest way to retrieve a
-    document.
-  - You create a URI that identifies the document. This URI comprises of
-    an encoded reference to the datatabase (DeviceData), collection
-    (Temperatures), and the unique Id for the document.
-  - Additionally, if the collection is partitioned, you must also
-    specify in which partition that data is located (partitioning in
-    Cosmos DB is discussed in more detail later).
-  - The value returned by the ReadDocumentAsync method is an object
-    (specified by the type parameter - ThermometerReading) containing
-    the data.
+18. Explain that:
+    - The ReadDocumentAsync method provides the fastest way to retrieve a
+        document.
+    - You create a URI that identifies the document. This URI comprises of
+        an encoded reference to the datatabase (DeviceData), collection
+        (Temperatures), and the unique Id for the document.
+    - Additionally, if the collection is partitioned, you must also
+        specify in which partition that data is located (partitioning in
+        Cosmos DB is discussed in more detail later).
+    - The value returned by the ReadDocumentAsync method is an object
+        (specified by the type parameter - ThermometerReading) containing
+        the data.
 
-20. Highlight the following block of
+19. Highlight the following block of
     code:
 
     ```C#
@@ -947,16 +946,16 @@ SQL API database.**
         Console.WriteLine($"{doc.ToString()}");
     }
     ```
-22. Explain that:
-  - This code uses a SQL statement to find documents that match the
-    specified criteria.
-  - The deviceID is specified as a parameter to the SQL statement.
-  - You specify the collection to search, but you don't need to indicate
-    in which partitions that data is likely to be found.
-  - Cosmos DB will use an index to find all matching documents.
-  - The query (defined by calling the **CreateDocumentQuery** method)
-    does not actually run until you start to iterate through the result
-    set.
+20. Explain that:
+    - This code uses a SQL statement to find documents that match the
+        specified criteria.
+    - The deviceID is specified as a parameter to the SQL statement.
+    - You specify the collection to search, but you don't need to indicate
+        in which partitions that data is likely to be found.
+    - Cosmos DB will use an index to find all matching documents.
+    - The query (defined by calling the **CreateDocumentQuery** method)
+        does not actually run until you start to iterate through the result
+        set.
 
 #### Task 2: Run the sample application
 
@@ -1091,13 +1090,13 @@ temperature data into the Temperatures collection.
     regions, and then click **Save**.
 6.  Note that each region is added as an additional read region.
 
-> It can take several minutes for the new read regions to become
-> available, especially for large datasets. During the replication
-> process the data is still available from the write region. All writes
-> will still be performed on the write region, with opportunistic
-> updates happening when the new read regions have become available. The
-> current SLA for adding additional regions is a maximum of 30 minutes,
-> but in practice the time is far less than that.
+    > It can take several minutes for the new read regions to become
+    > available, especially for large datasets. During the replication
+    > process the data is still available from the write region. All writes
+    > will still be performed on the write region, with opportunistic
+    > updates happening when the new read regions have become available. The
+    > current SLA for adding additional regions is a maximum of 30 minutes,
+    > but in practice the time is far less than that.
 
 7.  Note that clients can reduce the latency of their queries by
     specifying the region closest to them in their applications

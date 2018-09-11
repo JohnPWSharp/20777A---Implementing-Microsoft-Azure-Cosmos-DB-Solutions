@@ -80,21 +80,21 @@ Before starting this demo:
 
 14. In the **Partition key** box, type **/deviceID**.
 
-**Note**: Cosmos DB is case sensitive; the case of the partitioning key must match the case of the property in your documents.
+    > **Note:** Cosmos DB is case sensitive; the case of the partitioning key must match the case of the property in your documents.
 
-16. In the **Throughput (1,000 - 100,000 RU/s)** box, type **15000**, and then click **OK**.
+15. In the **Throughput (1,000 - 100,000 RU/s)** box, type **15000**, and then click **OK**.
 
-17. On the **20777a-sql-\<your name\>-\<the day\>** blade, click **New Collection**.
+16. On the **20777a-sql-\<your name\>-\<the day\>** blade, click **New Collection**.
 
-18. On the **Add Collection** blade, click **Use existing**, and then in the drop-down list, click **DeviceData**.
+17. On the **Add Collection** blade, click **Use existing**, and then in the drop-down list, click **DeviceData**.
 
-19. In the **Collection Id** box, type **Temperatures2**.
+18. In the **Collection Id** box, type **Temperatures2**.
 
-20. Under **Storage capacity**, click **Unlimited**.
+19. Under **Storage capacity**, click **Unlimited**.
 
-21. In the **Partition key** box, type **/date**.
+20. In the **Partition key** box, type **/date**.
 
-22. In the **Throughput (1,000 - 100,000 RU/s)** box, type **15000**, and then click **OK**.
+21. In the **Throughput (1,000 - 100,000 RU/s)** box, type **15000**, and then click **OK**.
 
 #### Task 2: Populate the collections
 
@@ -120,15 +120,15 @@ Before starting this demo:
 
 #### Task 3: Test the Partitioning Strategy
 
-1.  In File Explorer, navigate to **E:\\Demofiles\\Mod02\\Demo01\\Partitioning**, and then double-click **Partitioning.sln**.
+1. In File Explorer, navigate to **E:\\Demofiles\\Mod02\\Demo01\\Partitioning**, and then double-click **Partitioning.sln**.
 
-2.  In the **How do you want to open this file?** dialog box, double-click **Visual Studio 2017**.
+2. In the **How do you want to open this file?** dialog box, double-click **Visual Studio 2017**.
 
-3.  Explain that this application simulates many concurrent users performing queries against temperature data, and calculates the query cost in Resource Units per second (RU/s).
+3. Explain that this application simulates many concurrent users performing queries against temperature data, and calculates the query cost in Resource Units per second (RU/s).
 
-4.  In Solution Explorer, double-click **ClientReader.cs**.
+4. In Solution Explorer, double-click **ClientReader.cs**.
 
-5.  Scroll down to the **RunQueriesAsync** method. Explain that the details of the Azure SDK are covered in more detail later in this module, but point out the following features:
+5. Scroll down to the **RunQueriesAsync** method. Explain that the details of the Azure SDK are covered in more detail later in this module, but point out the following features:
     
     - The code runs a query to retrieve all the temperature readings for a specified device:
 
@@ -162,35 +162,35 @@ Before starting this demo:
     SELECT VALUE avg(c.temperature) FROM {this.collectionName} c WHERE c.deviceID = @devID
     SELECT VALUE count(1) FROM {this.collectionName} c WHERE c.deviceID = @devID
     ```
-6.  In Solution Explorer, double-click **App.config**.
+6. In Solution Explorer, double-click **App.config**.
 
-7.  In Internet Explorer, in the Azure Portal, on the **20777a-sql-\<your name\>-\<the day\>** blade, click **Keys**.
+7. In Internet Explorer, in the Azure Portal, on the **20777a-sql-\<your name\>-\<the day\>** blade, click **Keys**.
 
-8.  Make a note of the **URI**, and **PRIMARY KEY** values.
+8. Make a note of the **URI**, and **PRIMARY KEY** values.
 
-9.  In Visual Studio, in the **Value** attribute of the **EndpointURL** key, paste the **URI** value, replacing the text **your\_URI\_here**.
+9. In Visual Studio, in the **Value** attribute of the **EndpointURL** key, paste the **URI** value, replacing the text **your\_URI\_here**.
 
     ```XML
     <add key="EndpointUrl" value="your_URI_here" />
     ```
 
-10.  In Visual Studio, in the **Value** attribute of the **PrimaryKey** key, paste the **PRIMARY KEY** value, replacing the text **your\_PK\_here**.
+10. In Visual Studio, in the **Value** attribute of the **PrimaryKey** key, paste the **PRIMARY KEY** value, replacing the text **your\_PK\_here**.
 
-    ```XML 
+    ```XML
     <add key="PrimaryKey" value="your_PK_here" />
     ```
 
-11.   Confirm that the value of the **Database** key is **DeviceData** and that the value of the **Collection** key is **Temperature2**.
+11. Confirm that the value of the **Database** key is **DeviceData** and that the value of the **Collection** key is **Temperature2**.
 
-12.   In ClientReader.cs, in the **RunQueriesAsync** method, confirm that the **EnableCrossPartitionQuery** and **MaxDegreeOfParallelism** options are not commented out, and the **PartitionKey** option is commented out (as in the code shown in step 5 above).
+12. In ClientReader.cs, in the **RunQueriesAsync** method, confirm that the **EnableCrossPartitionQuery** and **MaxDegreeOfParallelism** options are not commented out, and the **PartitionKey** option is commented out (as in the code shown in step 5 above).
 
-13.   Press F5 to run the application. The application will take a couple of minutes to run; it simulates 100 concurrent users, each performing 10 iterations of the workload specified in the **ClientReader** class. When it completes, make a note of the **Processing Throughput (in RU/s)** (query cost) and **Elapsed Time** returned by the application.
+13. Press F5 to run the application. The application will take a couple of minutes to run; it simulates 100 concurrent users, each performing 10 iterations of the workload specified in the **ClientReader** class. When it completes, make a note of the **Processing Throughput (in RU/s)** (query cost) and **Elapsed Time** returned by the application.
 
-**Note**: The **Processing Throughput (in RU/s)** figure shows the throughput consumed by the query in RU/s. The higher the **Processing Throughput (in RU/s)** value, the greater the cost of the query.
+    > **Note:** The **Processing Throughput (in RU/s)** figure shows the throughput consumed by the query in RU/s. The higher the **Processing Throughput (in RU/s)** value, the greater the cost of the query.
 
-14.   When the application is complete, press any key to close the window.
+14. When the application is complete, press any key to close the window.
 
-15.   To change the application to use the **Temperatures** collection (that is partitioned by **deviceId**), in Solution Explorer, double-click **App.config**, and edit the values of the **Collection** key so that it reads:
+15. To change the application to use the **Temperatures** collection (that is partitioned by **deviceId**), in Solution Explorer, double-click **App.config**, and edit the values of the **Collection** key so that it reads:
 
     ```XML 
     <add key="Collection" value="Temperatures" />
@@ -229,7 +229,7 @@ Before starting this demo:
 
 4.  Close Visual Studio, but leave Internet Explorer open for the next demonstration.
 
-> **Note:** You should delete the collections at the end of the demonstration to avoid unexpected charges to you Azure subscription.
+    > **Note:** You should delete the collections at the end of the demonstration to avoid unexpected charges to you Azure subscription.
 
 ## Lesson 2: Querying Data in SQL API Databases
 
@@ -413,9 +413,7 @@ You need to have completed the previous demonstration before following these ste
 
 3.  Leave Internet Explorer open for the next demonstration.
 
-
-
-  - > **Note:** You should delete the collection at the end of the demonstration to avoid unexpected charges to you Azure subscription
+    > **Note:** You should delete the collection at the end of the demonstration to avoid unexpected charges to you Azure subscription
 
 ## Lesson 3: Querying and Maintaining Data Programmatically
 
@@ -618,7 +616,7 @@ You need to have completed the previous demonstration before following these ste
 
 8.  Leave Internet Explorer open for the next demonstration.
 
-    >**NOTE**: Do not delete the **Temperatures** collection at the end of this demonstration; it is needed for the next demonstration in this module.
+    >**Note:** Do not delete the **Temperatures** collection at the end of this demonstration; it is needed for the next demonstration in this module.
 
 ### Demo 2: Querying, Inserting, Modifying, and Deleting Data using the SQL API
 
@@ -626,7 +624,7 @@ You need to have completed the previous demonstration before following these ste
 
 You need to have completed the previous demonstration before following these steps.
 
-> Note: This demo requires the **Temperatures** collection created by the previous demonstration.
+> **Note:** This demo requires the **Temperatures** collection created by the previous demonstration.
 
 #### Task 1: Retrieve Documents by ID
 
@@ -913,7 +911,7 @@ Message: {"Errors":["Resource Not Found"]}
     Update failed - another user already changed this document. Requery and try again
     ```
     
-    > **Note**: The messages might be mixed up with the re-display of the application menu. This is a side-effect of the threaded execution of the tasks and does not indicate an error.
+    > **Note:** The messages might be mixed up with the re-display of the application menu. This is a side-effect of the threaded execution of the tasks and does not indicate an error.
 
 23. At the command prompt, type **X** to close the application.
 
