@@ -43,13 +43,13 @@ Before starting this demo:
 
 4.  In the Azure portal, in the left panel, click **Azure Cosmos DB**, and then click **+ Add**.
 
-5.  On the **Azure Cosmos DB** blade, in the **ID** box, type **20777a-sql-\<your name\>-\<the day\>**, for example, **20777a-sql-john-31**.
+5.  On the **Azure Cosmos DB** blade, under the **Resource Group** box, click **Create new**, type **20777aMod3**, and then click **OK**.
 
-6.  In the **API** drop-down list, note the options available, and then click **SQL**.
+6. In the **Account name** box, type **20777a-sql-\<your name\>-\<the day\>**, for example, **20777a-sql-john-31**.
 
-7.  In the **Resource Group** box, type **20777aMod3**.
+7.  In the **API** drop-down list, note the options available, and then click **SQL**.
 
-8.  In the **Location** drop-down list, click the region closest to your current location, and then click **Create**.
+8.  In the **Location** drop-down list, click the region closest to your current location, click **Review + create**, and then click **Create**.
 
 9.  Wait for the Azure Cosmos DB to be created—this could take a few minutes.
 
@@ -533,7 +533,7 @@ This demonstration assumes that you have completed the previous demonstrations i
 
 #### Task 1: Create a Pre-Trigger
 
-**Scenario:** You need to validate the `time` property (indicating the date and time expressed in .Net Ticks—100 nanosecond intervals—since 1 January, 0001) for documents in the **Temperatures** collection as they are created or replaced. A valid `time` is one that is not ore than an hour old, or more than 10 seconds into the future (to allow for some clock skew) when compared to the server time. Additionally, if a document does not contain a `time` property, you need to add one with a default value of the current time. You decide to write a pre-trigger to perform this validation.
+**Scenario:** You need to validate the `time` property (indicating the date and time expressed in .NET Framework Ticks—100 nanosecond intervals—since 1 January, 0001) for documents in the **Temperatures** collection as they are created or replaced. A valid `time` is one that is not ore than an hour old, or more than 10 seconds into the future (to allow for some clock skew) when compared to the server time. Additionally, if a document does not contain a `time` property, you need to add one with a default value of the current time. You decide to write a pre-trigger to perform this validation.
 
 1.  In Internet Explorer, on the **20777a-sql-\<your name\>-\<the day\>** blade, click **Data Explorer**.
 
