@@ -43,19 +43,19 @@ Before starting this demo:
 
 6.  In the Azure portal, in the left panel, click **Azure Cosmos DB**, and then click **+ Add**.
 
-7.  On the **Azure Cosmos DB** blade, in the **ID** box, type **20777a-sql-\<your name\>-\<the day\>**, for example, **20777a-sql-john-31**.
+7.  On the **Azure Cosmos DB** blade, under the **Resource Group** box, click **Create new**, type **20777aMod4**, and then click **OK**.
 
-8.  In the **API** drop-down list, note the options available, and then click **SQL**.
+8. In the **Account name** box, type **20777a-sql-\<your name\>-\<the day\>**, for example, **20777a-sql-john-31**.
 
-9.  In the **Resource Group** box, type **20777aMod4**.
+9.  In the **API** drop-down list, click **SQL**.
 
-10. In the **Location** drop-down list, click a region closest to your current location, and then click **Create**.
+10. In the **Location** drop-down list, click a region closest to your current location, click **Review + create**, and then click **Create**.
 
 11. Wait for the Azure Cosmos DB to be created—this could take a few minutes.
 
 12. On the **Azure Cosmos DB** blade, click **Refresh**, and then click **20777a-sql-\<your name\>-\<the day\>**.
 
-13. On the **20777a-sql-\<your name\>-\<the day\>** blade, under **SETTINGS**, click **Replicate data globally**, and then click **Add new region**.
+13. On the **20777a-sql-\<your name\>-\<the day\>** blade, under **Settings**, click **Replicate data globally**, and then click **Add new region**.
 14. On the **Replicate data globally** blade, in the **Search for a region** drop-down list, click a region that is on a different continent, and then click **OK**.
 15. On the **Replicate data globally** blade, click **Save**. Wait until the process is complete, this can take upto 5 minutes.  
 16. On the **20777a-sql-\<your name\>-\<the day\>** blade, click **Data Explorer**, and then click **New Database**.
@@ -76,13 +76,13 @@ Before starting this demo:
 
 23. Wait for the script to finish, and then press Enter.
 
-24. In Internet Explorer, on the **20777a-sql-\<your name\>-\<the day\>** blade, under **SETTINGS**, click **Keys**.
+24. In Internet Explorer, on the **20777a-sql-\<your name\>-\<the day\>** blade, under **Settings**, click **Keys**.
 
 25. Make a note of the **URI**, and **PRIMARY KEY** values.
 
 #### Task 1: Configure the Cosmos DB Account and Database
 
-1. In Internet Explorer, on the **20777a-sql-\<your name\>-\<the day\>** blade, under **SETTINGS**, click **Default consistency**.
+1. In Internet Explorer, on the **20777a-sql-\<your name\>-\<the day\>** blade, under **Settings**, click **Default consistency**.
 
 2. Verify that the default consistency for the account is **Session**.
 
@@ -402,13 +402,13 @@ You want to store this information in a document database, but want to assess th
 
 Before starting this demo:
 
-1.  In Internet Explorer, on the **20777a-sql-\<your name\>-\<the day\>** blade, under **SETTINGS**, click **Default consistency**, and verify that the default consistency for the account is **Session**.
+1.  In Internet Explorer, on the **20777a-sql-\<your name\>-\<the day\>** blade, under **Settings**, click **Default consistency**, and verify that the default consistency for the account is **Session**.
 
 2.  Click **Data Explorer**, and then click **New Database**.
 
 3.  On the **New Database** blade, in the **Database id** box, type **Cricket**, and then click **OK**.
 
-4.  Under **SETTINGS**, click **Keys**.
+4.  Under **Settings**, click **Keys**.
 
 5.  Make a note of the **PRIMARY CONNECTION STRING** value.
 
@@ -1130,7 +1130,7 @@ Before starting this demo:
 
 #### Task 4: Examine the Physical to Logical Mapping of Partitions
 
-1.  In Internet Explorer, on the **20777a-sql-\<your name\>-\<the day\>** blade, under **MONITORING** click **Metrics**.
+1.  In Internet Explorer, on the **20777a-sql-\<your name\>-\<the day\>** blade, under **Monitoring** click **Metrics**.
 
 2.  On the **Metrics** blade, on the **Storage** tab, in the **Database(s)** drop-down list, click **Cricket**.
 
@@ -1150,14 +1150,14 @@ Before starting this demo:
 
 1.  Complete demo 2 to create and populate the **Cricket** database and the various collections required for this demo.
 
-2.  In Internet Explorer, on the **20777a-sql-\<your name\>-\<the day\>** blade, under **SETTINGS**, click **Replicate data globally**.
+2.  In Internet Explorer, on the **20777a-sql-\<your name\>-\<the day\>** blade, under **Settings**, click **Replicate data globally**.
 3.  If the **Message from webpage** dialog box appears, click **OK**.
 4.  On the **Replicate data globally** blade, under **READ REGIONS**, click the trash can icon to delete the failover, and then click **Save**. This can take upto 5 minutes to save.
-5.  On the **20777a-sql-\<your name\>-\<the day\>** blade, under **SETTINGS**, click **Default consistency**. 
+5.  On the **20777a-sql-\<your name\>-\<the day\>** blade, under **Settings**, click **Default consistency**. 
 
 7.  On the **Default consistency** blade, click **STRONG**, and then click **Save**.
 
-8.  On the **20777a-sql-\<your name\>-\<the day\>** blade, under **SETTINGS**, click **Keys**.
+8.  On the **20777a-sql-\<your name\>-\<the day\>** blade, under **Settings**, click **Keys**.
 
 9.  Make a note of the **PRIMARY CONNECTION STRING** value.
 
