@@ -63,17 +63,11 @@ Before starting this demo:
 
 1. In the Azure portal, in the left panel, click **Azure Cosmos DB**,
     and then click **+ Add**.
-2. On the **Azure Cosmos DB** blade, in the **ID** box, type
-    **20777a-sql-\<your name\>-\<the day\>**, for example,
-    **20777a-sql-john-10**.
-3. In the **API** drop-down list, note the options available, and then
-    click **SQL**.
-4. In the **Resource Group** box, type **20777aMod1**.
-5. In the **Location** drop-down list, click the region closest to your
-    current location, and then click
-    **Create**.
-6. Wait for the Azure Cosmos DB to be created—this could take a few
-    minutes.    
+2. On the **Azure Cosmos DB** blade, under the **Resource Group** box click **Create new**, type **20777_Mod01**, and then click **OK**
+3. In the **Account name** box, type **20777a-sql-\<your name\>-\<the day\>**, for example, **20777a-sql-john-10**.
+4. In the **API** drop-down list, note the options available, and then click **SQL**.
+5. In the **Location** drop-down list, click the region closest to your current location, click **Review + create**, and then click **Create**.
+6. Wait for the Azure Cosmos DB to be created—this could take a few minutes.    
 7. On the **Azure Cosmos DB** blade, click **20777a-sql-\<your
     name\>-\<the day\>**, and then click **Data Explorer**.
 8. In the **SQL API** pane, click **New Database**.
