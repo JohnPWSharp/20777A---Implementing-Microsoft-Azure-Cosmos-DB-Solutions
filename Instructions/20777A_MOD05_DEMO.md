@@ -41,13 +41,13 @@ Before starting this demo:
 
 1.  In the Azure portal, in the left panel, click **Azure Cosmos DB**, and then click **+ Add**.
 
-2.  On the **Azure Cosmos DB** blade, in the **ID** box, type **20777a-mod5-graph-\<your name\>-\<the day\>**, for example, **20777a-mod5-graph-john-10**.
+2.  On the **Azure Cosmos DB** blade, under **Resource group**, click **Create new**, type **2077aMod05**, and then click **OK**.
 
-3.  In the **API** drop-down list, note the options available, and then click **Gremlin (graph)**.
+3.  In the **Account name** box, type **20777a-mod5-graph-\<your name\>-\<the day\>**, for example, **20777a-mod5-graph-john-10**.
 
-4.  In the **Resource Group** box, type **20777aMod5**.
+4.  In the **API** drop-down list, note the options available, and then click **Gremlin (graph)**.
 
-5.  In the **Location** drop-down list, click the region closest to your current location, and then click **Create**.
+5.  In the **Location** drop-down list, click the region closest to your current location, click **Review + create**, and then click **Create**.
 
 6.  Wait for the **Azure Cosmos DB** to be created—this could take a few minutes.
 
@@ -174,7 +174,7 @@ You must have completed the previous demonstration, this should have created a m
 
 1.  Press F5 to build and run the application.
 
-2.  Note that the build fails and there are numerous errors. Explain that this code is supposed to be a starting point for development, and that it requires some updates to get fully working.
+2.  Note that the build fails and there are numerous errors. This code is supposed to be just a starting point for development, and it requires some updates to get fully working.
 
 3.  In the **Microsoft Visual Studio** dialog box, click **No**.
 
@@ -308,15 +308,15 @@ You must have completed the previous demonstration, this should have created a m
 
 20. In the **Configure graph** dialog box, select the **Show Edge Labels** check box, and note how both actors and directors have been used in the graph traversal.
 
-21. Close Internet Explorer, and then close Visual Studio 2017.
+21. Close Visual Studio 2017.
 
 #### Task 6: Demonstration clean up
 
-1.  In the Azure portal, in the left pane, click Resource groups.
+1.  In the Azure portal, in the left pane, click **Resource groups**.
 
-2.  On the Resource groups blade, right-click 20777aMod5, and then click Delete resource group.
+2.  On the **Resource groups** blade, right-click **20777aMod5**, and then click **Delete resource group**.
 
-3.  On the Are you sure you want to delete "20777aMod5"? blade, in the TYPE THE RESOURCE GROUP NAME box, type 20777aMod5, and then click Delete.
+3.  On the **Are you sure you want to delete "20777aMod5"?** blade, in the **TYPE THE RESOURCE GROUP NAME** box, type **20777aMod5**, and then click **Delete**.
 
 ---
 © 2018 Microsoft Corporation. All rights reserved.
