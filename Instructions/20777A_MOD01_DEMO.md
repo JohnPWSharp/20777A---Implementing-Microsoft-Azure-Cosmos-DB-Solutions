@@ -343,14 +343,14 @@ MongoDB.
     if required.
 2.  In the left pane, click **Azure Cosmos DB**, and then click **+
     Add**.
-3.  On the **Azure Cosmos DB** blade, in the **ID** box, type
+3.  On the **Azure Cosmos DB** blade, in the **Resource Group** drop-down list, click **20777aMod1**.
+
+4.  In the **Account name** box, type
     **20777a-mongo-\<your name\>-\<the day\>**, for example
     **20777a-Mongo-jane-12**.
-4.  In the **API** drop-down list, click **MongoDB**.
-5.  Under **Resource Group**, click **Use existing**, and then in the
-    drop-down list, click **20777aMod1**.
+5.  In the **API** drop-down list, click **MongoDB**.
 6.  In the **Location** drop-down list, click the region closest to your
-    current location, and then click
+    current location, click **Review * create**, and then click
     **Create**.
 7.  Wait for the Azure Cosmos DB to be created—this might take a few
     minutes.    
@@ -367,7 +367,7 @@ MongoDB.
 14. In the **Collection Id** box, type **Temperatures**.
 15. In the **Throughput** box, change **1000** to **5000**, and then
     click **OK**.
-16. In the left pane, under **SETTINGS**, click **Connection String**.
+16. In the left pane, under **Settings**, click **Connection String**.
 17. Make a note of the following values:
 
     ```
@@ -426,7 +426,7 @@ MongoDB.
 8.  In the **Collection Id** box, type **Temperatures**.
 9.  In the **Throughput** box, change **1000** to **5000**, and then
     click **OK**.
-10. In the left pane, under **SETTINGS**, click **Keys**.
+10. In the left pane, under **Settings**, click **Keys**.
 11. Make a note of the **PRIMARY CONNECTION STRING**.
 12. In Internet Explorer, open a new tab, and then go to
     **https://github.com/azure/azure-documentdb-datamigrationtool**.
@@ -515,21 +515,18 @@ Before starting this demo:
 
 1.  In Internet Explorer, go to **http://portal.azure.com**, and sign in
     if required.
-2.  In the left pane, click **Storage accounts**, and then **+ Add**.
-3.  On the **Create storage account** blade, in the **Name** box, type
-    **20777a**.
-4.  Under **Resource group**, click **Use existing**.
-5.  In the drop-down list, click **20777aMod1**, and then click
-    **Create**.
-6.  Wait for the Azure storage account to be created—this might take a
-    few minutes.
-7.  On the **Storage accounts** blade, click **Refresh**, and then click
+2.  In the left pane, click **+ Create a resource**, click **Storage**, and then click **Storage account - blob file, table, queue**.
+3.  On the **Create storage account** blade, in the **Resource group** drop-down list, click **20777aMod1**.
+4.  In the **Storage account name** box, type **20777a**.
+5.  Click **Review + create**, and then click **Create**.
+6.  Wait for the Azure storage account to be created; this might take a few minutes.
+7.  In the left pane of the Azure portal, click **All resources**, and then click
     the **20777a** storage account.
 8.  On the **20777a** blade, on the **Overview** page, under
-    **Table Service**, click **Tables**, and then click **+ Table**.
+    **Table service**, click **Tables**, and then click **+ Table**.
 9.  In the **Add table** dialog box, in the **Table name** box, type
     **CriminalRecords**, and then click **OK**.
-10. In the left pane, under **SETTINGS**, click **Access keys**.
+10. In the left pane, under **Settings**, click **Access keys**.
 11. Make a note of the **key1** **Connection string**.
 12. On the Start menu, click **Visual Studio 2017**.
 13. In Visual Studio 2017, on the **File** menu, point to **Open**, and
@@ -582,16 +579,15 @@ of the records in the database.
 
 #### Task 2: Move the data from Table storage into a Table API database in Cosmos DB
 
-1.  In Internet Explorer, in the left pane, click **Azure Cosmos DB**,
+1.  In the Azure portal, in the left pane, click **Azure Cosmos DB**,
     and then click **+ Add**.
-2.  On the **Azure Cosmos DB** blade, in the **ID** box, type
+2.  On the **Azure Cosmos DB** blade, in the **Resource group** drop-down list, click **20777aMod1**
+3.  In the **Account name** box, type
     **20777a-table-api-\<your name\>-\<the day\>**, for example
     **20777a-table-api-james-12**.
-3.  In the **API** drop-down list, click **Azure Table**.
-4.  Under **Resource group**, click **Use existing**, and then in the
-    drop-down list, click **20777aMod1**.
-5.  In the **Location** drop-down list, click the region closest to your
-    current location, and then click
+4.  In the **API** drop-down list, click **Azure Table**.
+5.  In the **Location** dowp-down list, click the region closest to your
+    current location, click **Review + create**, and then click
     **Create**.
 6.  Wait for the Azure Cosmos DB to be created—this could take a few
     minutes.
@@ -601,7 +597,7 @@ of the records in the database.
 8.  On the **Add Table** blade, in the **Table Id** box, type
     **CriminalRecords**.
 9.  Change the **Throughput** value to **5000**, and then click **OK**.
-10. In the left pane, under **SETTINGS**, click **Connection String**.
+10. In the left pane, under **Settings**, click **Connection String**.
 11. Make a note of the **PRIMARY CONNECTION STRING** value.
 12. On the Start menu, type **cmd**, and then press Enter.
 13. At the command prompt, run the following commands, replacing the
@@ -826,7 +822,7 @@ DeviceData loaded with temperature data.
 2.  In the Azure portal, in the left panel, click **Azure Cosmos DB**,
     and then click the **20777a-sql-\<your name\>-\<the day\>**
     database.
-3.  In the left pane, under **SETTINGS**, click **Keys**.
+3.  In the left pane, under **Settings**, click **Keys**.
 4.  Make a note of the **URI** and **PRIMARY KEY** values for later in
     this demonstration.
 
@@ -993,7 +989,7 @@ SQL API Cosmos DB database.
 3.  In the left pane, click **Data Explorer**, and then click **New Database**.
 4.  On the **New Database** blade, in the **Database id** box, type
     **FlightData**, and then click **OK**.
-5.  In left pane, under **SETTINGS**, click **Keys**.
+5.  In left pane, under **Settings**, click **Keys**.
 6.  Copy the **URI** and **PRIMARY KEY** values for later in the
     demonstration.
 
@@ -1030,7 +1026,7 @@ SQL API Cosmos DB database.
     the time in milliseconds.
 5.  Type **C** to clear the collection, and have an empty database for
     the next step.
-6.  Type **B** to import the data with BulkExector. Note that this
+6.  Type **B** to import the data with BulkExector. This
     should take around 20 seconds with 50,000 RU/s. Note the time to
     compare to the first run.
 7.  Type **X** to close the application.
@@ -1074,7 +1070,7 @@ temperature data into the Temperatures collection.
 2.  In the Azure portal, in the left pane, click **Azure Cosmos DB**,
     and then click the **20777a-sql-\<your name\>-\<the day\>** you
     created in the previous demonstration.
-3.  In the left pane, under **SETTINGS**, click **Replicate data
+3.  In the left pane, under **Settings**, click **Replicate data
     globally**.
 4.  Note that by default there is only one region, so data isn't being
     replicated to different data centers. However, within the region the
