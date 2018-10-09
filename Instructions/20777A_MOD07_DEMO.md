@@ -44,12 +44,12 @@
 1. Ensure that the **MT17B-WS2016-NAT** and **20777A-LON-DEV** virtual machines are running, and then log on to **20777A-LON-DEV** as **LON-DEV\\Administrator** with the password **Pa55w.rd**.
 2. In File Explorer, go to **E:\\Demofiles\\Mod07**, right-click **Setup.cmd**, and then click **Run as administrator**.
 3. In Internet Explorer, go to **http://portal.azure.com**, and sign in using the Microsoft account that is associated with your Azure Learning pass subscription.
-4. In the Azure portal, in the left panel, click **Azure Cosmos DB**, and then click **Add**.
-5. On the **Azure Cosmos DB** blade, in the **ID** box, type **20777-sql-&lt;your name&gt;-&lt;the day&gt;**, for example, **20777-sql-john-31**.
-6. Click the **API** drop-down, note the options available, and then click **SQL**.
-7. In the **Resource Group** box, type **20777Mod07**.
-8. In the **Location** drop-down list, click the region closest to your current location, and then click **Create**. Wait for the Azure Cosmos DB to be created—this could take a few minutes.
-9.  On the **Azure Cosmos DB** blade, click **Refresh**, and then click **20777-sql-&lt;your name&gt;-&lt;the day&gt;**.
+4. In the Azure portal, in the left panel, click **Azure Cosmos DB**, and then click **+ Add**.
+5. On the **Azure Cosmos DB** blade, under the **Resource Group** box, click **Create new**, type **20777Mod07**, and then click **OK**.
+6. In the **Account name** box, type **20777-sql-&lt;your name&gt;-&lt;the day&gt;**, for example, **20777-sql-john-31**.
+7. Click the **API** drop-down, note the options available, and then click **SQL**.
+8. In the **Location** drop-down list, click the region closest to your current location, click **Review + create**, and then click **Create**. Wait for the Azure Cosmos DB to be created—this could take a few minutes.
+9.  In the Azure portal, in the left pane, click **All resources**, and then click **20777-sql-&lt;your name&gt;-&lt;the day&gt;**.
 10. On the **20777-sql-&lt;your name&gt;-&lt;the day&gt;** blade, click **Data Explorer**, and then click **New Database**.
 11. On the **New Database** blade, in the **Database id** box, type **StockMarket**, and then click **OK**.
 12. In the **SQL API** pane, click **New Collection**.
@@ -62,14 +62,14 @@
 19. On the **Add Collection** blade, click **Use existing**, and then in the drop-down list, click **StockMarket**.
 20. In the **Collection Id** box, type **StockPricesSummary**.
 21. In the **Throughput (400 - 10,000 RU/s)** box, type **2000**, and then click **OK**.
-22. On the **20777-sql-&lt;your name&gt;-&lt;the day&gt;** blade, under **SETTINGS**, click **Keys**.
+22. On the **20777-sql-&lt;your name&gt;-&lt;the day&gt;** blade, under **Settings**, click **Keys**.
 23. Make a note of the **URI**, and **PRIMARY KEY** values.
 
 #### Task 2: Generate dummy stock data
 
-The first task in this demonstration is to generate some simulated stock price data into the **StockPrice** collection.
+The next task in this demonstration is to generate some simulated stock price data into the **StockPrice** collection.
 
-1. On the Start menu, click **Visual Studio 2017**.
+1. On the Windows Start menu, click **Visual Studio 2017**.
 2. On the **File** menu, point to **Open**, and then click **Project/Solution**.
 3. In the **Open Project** dialog box, go to **E:\\Demofiles\\Mod07\\Demo01\\StockMarketSimulation**, and then double-click **StockMarketSimulation.sln**.
 4. In Solution Explorer, click **StockPriceChangeEvent.cs**.
@@ -129,9 +129,9 @@ The first task in this demonstration is to generate some simulated stock price d
 9. On the **App.config** tab, notice that the application requires an additional collection to store lease information. Replace **\~URI\~** with the **URI**, and replace **\~KEY\~** with the **PRIMARY KEY** values that you noted earlier.
 10. In Solution Explorer, right-click **StockAnalyzerUsingChangeFeedProcessorLibrary**, and then click **Set as Startup Project**.
 11. Press F5 to run the application.
-12. Allow the application to run to completion (it will run for approximately 60 seconds). As before, while the application runs, it displays output of the ticker values that it’s updating. Depending on the number of records in your StockPrice collection change feed, the application might stop processing after a few seconds because it has consumed the entire change feed.
+12. Allow the application to run to completion (it will execute for approximately 60 seconds). As before, while the application runs, it displays output of the ticker values that it’s updating. Depending on the number of records in your StockPrice collection change feed, the application might stop processing after a few seconds because it has consumed the entire change feed.
 13. Close Visual Studio.
-14. In Internet Explorer, on the **Data Explorer** blade, in the **SQL API** pane, click the refresh button. Observe that the application created a new **StockPricesSummary** collection, and a **StockPricesLease** collection.
+14. In Internet Explorer, on the **Data Explorer** blade, in the **SQL API** pane, click the refresh button. Notice that the application created a new **StockPricesSummary** collection, and a **StockPricesLease** collection.
 15. Expand **StockPricesSummary**, and then click **Documents**.
 16. On the **Documents** tab, click any of the documents to review the contents.
 17. In the **SQL API** pane, right-click **StockPricesSummary**, and then click **Delete Collection**.
@@ -164,7 +164,7 @@ The first task in this demonstration is to generate some simulated stock price d
 
 #### Task 1: Create Cosmos DB Emulator collections
 
-In this stage, you will configure the Cosmos DB Emulator with collections that correspond to the collections on your Cosmos DB account in Azure.
+In this task, you will configure the Cosmos DB Emulator with collections that correspond to the collections on your Cosmos DB account in Azure.
 
 1. On the Start menu, click **Azure Cosmos DB Emulator**, and then click **Azure Cosmos DB Emulator**. When the emulator starts, it will automatically open a new tab in Internet Explorer.
 2. In Internet Explorer, on the **Azure Cosmos DB Emulator** page, click **Explorer**.
@@ -188,8 +188,7 @@ In this stage, you will configure the Cosmos DB Emulator with collections that c
 6. In Solution Explorer, click **StockPriceSummaryDocument.cs**.
 7. On the **StockPriceSummaryDocument.cs** tab, review the contents of the file. This is the same stock price summary class that you used in the application in the previous demonstration.
 8. In Solution Explorer, click **StockPricesTrigger.cs**.
-9. On the **StockPricesTrigger.cs** tab, review the contents of the file. This file contains the Azure Function definition, in the **StockPricesTrigger** class. The **Run** method of the class contains the processing logic. The parameters passed to the method define the Cosmos DB connections used by the function; note that the method takes a **LeaseCollectionName** parameter (the function uses the Change Feed Processor Library). 
-   - The logic of the Run method is very similar to that used in the application in the previous demonstration:
+9. On the **StockPricesTrigger.cs** tab, review the contents of the file. This file contains the Azure Function definition, in the **StockPricesTrigger** class. The **Run** method of the class contains the processing logic. The parameters passed to the method define the Cosmos DB connections used by the function; note that the method takes a **LeaseCollectionName** parameter (the function uses the Change Feed Processor Library). The logic of the Run method is very similar to that used in the application in the previous demonstration:
      - A list of one or more change feed documents is read from the Cosmos DB change feed; this arrives in the variable called **input**.
      - For each document received, any existing summary document for the corresponding Ticker value is read from the summary collection using an input binding.
      - The summary document is updated with the values from the document received from the change feed.
@@ -213,7 +212,7 @@ In this stage, you will configure the Cosmos DB Emulator with collections that c
 17. In the Azure Functions emulator command prompt window, after a short delay, you should see a sequence of messages, indicating that the StockPricesTrigger function executed. The final message should begin:
 
     ```Text
-    Executed 'StockPricesTrigger' (Succeeded, Id=
+    Executed 'StockPricesTrigger' (Succeeded, Id=...)
     ```
 
 18. In Internet Explorer, on the **Azure Cosmos DB Emulator** page, expand **StockPricesSummary**, and then click **Documents**.
@@ -231,7 +230,7 @@ In this stage, you will configure the Cosmos DB Emulator with collections that c
     ```
 
 23. Wait five seconds for the function to run, under **StockPricesSummary**, click **Documents**.
-24. On the **Documents** tab, click the first document in the list (there should be only one). Notice that the summary information for the Ticker value **XXXX** now reflects the document that you added to the **StockPrices** collection.
+24. On the **Documents** tab, click the first document in the list (there should still only be one). Notice that the summary information for the Ticker value **XXXX** now reflects the document that you added to the **StockPrices** collection.
 25. Close the Azure Cosmos DB Emulator page.
 26. In the Azure Functions emulator command prompt window, to stop the emulator, press Ctrl+C.
 27. If the command prompt window does not close by itself after 30 seconds, close the window manually (using the **X** in the upper right corner).
@@ -249,9 +248,9 @@ In this stage, you will configure the Cosmos DB Emulator with collections that c
 6. In the **Location** box, select a location near you; you should use the same location that you used for your Cosmos DB account if it appears in the list.
 7. Make a note of the **Storage** value.
 8. Under **Application Insights**, click **Off**, and then click **Create**.
-9.  When deployment is complete, click **All resources**.
-10. On the **All resources** blade, click the name of the **Storage account** that you noted earlier.
-11. On the storage account blade, under **SETTINGS**, click **Access keys**.
+9. When deployment is complete, click **All resources**.
+10. On the **All resources** blade, click the name of the **Storage account** that you noted in step 7.
+11. On the storage account blade, under **Settings**, click **Access keys**.
 12. Under **key1**, make a note of the **Connection string** value.
 13. In Visual Studio, on the **local.settings.json** tab, edit the values of the **AzureWebJobsDashboard** and **AzureWebJobsStorage** properties to match the **Connection string** that you noted in the previous step.
 
@@ -262,10 +261,10 @@ In this stage, you will configure the Cosmos DB Emulator with collections that c
 3. On the **Add Collection** blade, click **Use existing**, and then in the drop-down list, click **StockMarket**.
 4. In the **Collection Id** box, type **StockPricesSummary**.
 5. In the **Throughput (400 - 10,000 RU/s)** box, type **2000**, and then click **OK**.
-6. On the **20777-sql-&lt;your name&gt;-&lt;the day&gt;** blade, under **SETTINGS**, click **Keys**.
+6. On the **20777-sql-&lt;your name&gt;-&lt;the day&gt;** blade, under **Settings**, click **Keys**.
 7. Make a note of the **PRIMARY CONNECTION STRING** value.
-8.  In Visual Studio, on the **local.settings.json** tab, edit the value of the **StockPricesTrigger_ConnectionString** property to match the **PRIMARY CONNECTION STRING** value that you recorded in the previous step. Note that the local.settings.json file only affects the behavior of the Azure Functions emulator; values in the file are not published to Azure.
-9.  Press F5 to run the application.
+8.  In Visual Studio, on the **local.settings.json** tab, edit the value of the **StockPricesTrigger_ConnectionString** property to match the **PRIMARY CONNECTION STRING** value that you recorded in the previous step. Note that the local.settings.json file only affects the behavior of the Azure Functions emulator; values in this file are not published to Azure.
+9. Press F5 to run the application.
 10. When the Azure Functions emulator has started, in Internet Explorer, in the Azure portal, click **All resources**.
 11. On the **All resources** blade, click **20777-sql-&lt;your name&gt;-&lt;the day&gt;**, and then click **Data Explorer**.
 12. In the **SQL API** pane, expand **StockPrices**, and then click **Documents**.
@@ -283,7 +282,7 @@ In this stage, you will configure the Cosmos DB Emulator with collections that c
 15. In the Azure Functions emulator command prompt window, after a short delay, you should see a sequence of messages indicating that the StockPricesTrigger function executed. The final message should begin:
 
     ```Text
-    Executed 'StockPricesTrigger' (Succeeded, Id=
+    Executed 'StockPricesTrigger' (Succeeded, Id=...)
     ```
 
 16. In Internet Explorer, in the **SQL API** pane, expand **StockPricesSummary**, and then click **Documents**.
@@ -301,7 +300,7 @@ In this stage, you will configure the Cosmos DB Emulator with collections that c
     ```
 
 21. Wait five seconds for the function to run, under **StockPricesSummary**, and then click **Documents**.
-22. On the **Documents** tab, click the first document in the list (there should be only one). The summary information for the Ticker value **XXXX** should now reflect the document that you added to the **StockPrices** collection.
+22. On the **Documents** tab, click the first document in the list (there should still be only one). The summary information for the Ticker value **XXXX** should now reflect the document that you added to the **StockPrices** collection.
 23. In the Azure Functions emulator command prompt window, to stop the emulator, press Ctrl+C.
 24. If the command prompt window does not close by itself after 30 seconds, close the window manually (using the **X** in the upper-right corner).
 
@@ -309,24 +308,27 @@ In this stage, you will configure the Cosmos DB Emulator with collections that c
 
 1. In Internet Explorer, in the Azure portal, click **All resources**.
 2. On the **All resources** blade, click **20777-func-&lt;your name&gt;-&lt;the day&gt;**.
-3. On the **20777-func-&lt;your name&gt;-&lt;the day&gt;** blade, on the **Overview** tab, under **Configured features**, click **Application settings**.
-4. On the **Application settings** tab, under **Application settings**, click **+ Add new setting**.
-5. In the **Enter a name** box, type **StockPricesTrigger_ConnectionString**.
-6. In the **Enter a value** box, type the **PRIMARY CONNECTION STRING** value that you noted earlier then, and then click **Save**. If you do not add this application setting, the function will not be able to connect to your Cosmos DB account, and it will fail silently.
-7. In Visual Studio, on the **Build** menu, click **Publish StockPricesTriggerFunctionApp** to deploy the function.
-8. On the **StockPricesTriggerFunctionApp** tab, click **New Profile**.
-9. In the **Pick a publish target** dialog box, click **Select Existing**, and then click **Publish**.
-10. In the **App Service** dialog box, click **Sign In**.
-11. In the **Sign in to your account** dialog box, sign in to Azure with you Azure pass credentials.
-12. In the **App Service** dialog box, under **Search**, expand **20777Mod07**, click **20777-func-&lt;your name&gt;-&lt;the day&gt;**, and then click **OK**.
-13. Publication begins immediately; publication is complete when the **Output** pane displays the **Publish completed** message.
-14. In Internet Explorer, in the Azure portal, click **All resources**, and then click **20777-func-&lt;your name&gt;-&lt;the day&gt;**.
-15. On the **20777-func-&lt;your name&gt;-&lt;the day&gt;** blade, under **Functions (Read Only)**, click **StockPricesTrigger**. The **function.json** for the function is displayed, but that it’s grayed out, and a message notifies you that the app is in read-only mode because it was published from Visual Studio.
-16. Review the contents of function.json. Note that the function definition includes a **cosmosDBTrigger** binding, and that the binding has the **name** property with the value **input**. This is the name of the variable in the C\# code that contains the documents received from the change feed.
-17. Click **All resources**, click **20777-sql-&lt;your name&gt;-&lt;the day&gt;**, and then click **Data Explorer**.
-18. In the **SQL API** pane, expand **StockPrices**, and then click **Documents**.
-19. On the **Documents** tab, click **New Document**.
-20. Edit the new document definition as shown below, and then click **Save**:
+3. On the **20777-func-&lt;your name&gt;-&lt;the day&gt;** blade, on the **Overview** tab, click **Stop**.
+4. In the **Function Apps** pane, click the **Refresh** button by the **20777-func-&lt;your name&gt;-&lt;the day&gt;**
+5. On the **Overview** tab, under **Configured features**, click **Application settings**.
+6. On the **Application settings** tab, under **Application settings**, click **+ Add new setting**.
+7. In the **Enter a name** box, type **StockPricesTrigger_ConnectionString**.
+8. In the **Enter a value** box, type the **PRIMARY CONNECTION STRING** value that you noted earlier then, and then click **Save**. If you do not add this application setting, the function will not be able to connect to your Cosmos DB account, and it will fail silently.
+9. In Visual Studio, on the **Build** menu, click **Publish StockPricesTriggerFunctionApp** to deploy the function.
+10. On the **StockPricesTriggerFunctionApp** tab, click **New Profile**.
+11. In the **Pick a publish target** dialog box, click **Select Existing**, and then click **Publish**.
+12. In the **App Service** dialog box, click **Sign In**.
+13. In the **Sign in to your account** dialog box, sign in to Azure with you Azure pass credentials.
+14. In the **App Service** dialog box, under **Search**, expand **20777Mod07**, click **20777-func-&lt;your name&gt;-&lt;the day&gt;**, and then click **OK**.
+15. Publication begins immediately; publication is complete when the **Output** pane displays the **Publish completed** message.
+16. In Internet Explorer, in the Azure portal, click **All resources**, and then click **20777-func-&lt;your name&gt;-&lt;the day&gt;**.
+17. On the **20777-func-&lt;your name&gt;-&lt;the day&gt;** blade, on the **Overview** tab, click **Start**.
+18. In the **Function Apps** pane, expand **Functions (Read Only)**, click **StockPricesTrigger**. The **function.json** description of the function is displayed, but that it’s grayed out, and a message notifies you that the app is in read-only mode because it was published from Visual Studio.
+19. Review the contents of function.json. Note that the function definition includes a **cosmosDBTrigger** binding, and that the binding has the **name** property with the value **input**. This is the name of the variable in the C\# code that contains the documents received from the change feed.
+20. Click **All resources**, click **20777-sql-&lt;your name&gt;-&lt;the day&gt;**, and then click **Data Explorer**.
+21. In the **SQL API** pane, expand **StockPrices**, and then click **Documents**.
+22. On the **Documents** tab, click **New Document**.
+23. Edit the new document definition as shown below, and then click **Save**:
 
     ```JSON
     {
@@ -336,11 +338,11 @@ In this stage, you will configure the Cosmos DB Emulator with collections that c
     }
     ```
 
-21. Wait five seconds, expand **StockPricesSummary**, and then click **Documents**.
-22. On the **Documents** tab, click the second document in the list (there should be two). Observe that the summary information for the Ticker value **ABCD** reflects the document that you added to the **StockPrices** collection.
-23. Under **StockPrices**, click **Documents**.
-24. On the **Documents** tab, click **New Document**.
-25. Edit the new document definition as shown below, and then click **Save**:
+24. Wait five seconds, expand **StockPricesSummary**, and then click **Documents**.
+25. On the **Documents** tab, click the second document in the list (there should now be two of them). Observe that the summary information for the Ticker value **ABCD** reflects the document that you added to the **StockPrices** collection.
+26. Under **StockPrices**, click **Documents**.
+27. On the **Documents** tab, click **New Document**.
+28. Edit the new document definition as shown below, and then click **Save**:
 
     ```JSON
     {
@@ -350,8 +352,8 @@ In this stage, you will configure the Cosmos DB Emulator with collections that c
     }
     ```
 
-26. Wait five seconds for the function to run, under **StockPricesSummary**, click **Documents**.
-27. On the **Documents** tab, click the second document in the list (there should be only one). The summary information for the Ticker value **ABCD** now reflects the document that you added to the **StockPrices** collection.
+29. Wait five seconds for the function to run, and then, under **StockPricesSummary**, click **Documents**.
+30. On the **Documents** tab, click the second document in the list. The summary information for the Ticker value **ABCD** now reflects the changes caused by the document that you added to the **StockPrices** collection.
 
 #### Task 6: Clear down the demonstration environment
 
@@ -368,14 +370,14 @@ In this stage, you will configure the Cosmos DB Emulator with collections that c
 #### Task 1: Create a graph collection
 
 1. In the Azure portal, in the left panel, click **Azure Cosmos DB**, and then click **+ Add**.
-2. On the **Azure Cosmos DB** blade, in the **ID** box, type **20777-graph-&lt;your name&gt;-&lt;the day&gt;**, for example, **20777-graph-john-31**.
-3. In the **API** drop-down list, click **Gremlin (graph)**.
-4. Under the **Resource Group**, click **Use existing**, and then in the drop-down list, click **20777Mod07**.
-5. In the **Location** drop-down list, click the region closest to your current location, and then click **Create**.
+2. On the **Azure Cosmos DB** blade, in the **Resource Group** drop-down list, click **20777Mod07**.
+3. In the **Account name** box, type **20777-graph-&lt;your name&gt;-&lt;the day&gt;**, for example, **20777-graph-john-31**.
+4. In the **API** drop-down list, click **Gremlin (graph)**.
+5. In the **Location** drop-down list, click the region closest to your current location, click **Review + create**, and then click **Create**.
 6. Wait for the Azure Cosmos DB to be created. This could take a few minutes.
-7. On the **Azure Cosmos DB** blade, click **Refresh**, and then click **20777-graph-&lt;your name&gt;-&lt;the day&gt;**.
-8.  On the **20777-graph-&lt;your name&gt;-&lt;the day&gt;** blade, click **Overview**.
-9.  On the **Overview** blade, make a note of the **Gremlin Endpoint** value, and then click **Data Explorer**.
+7. In the Azure portal, in the left panel, click **20777-graph-&lt;your name&gt;-&lt;the day&gt;**.
+8. On the **20777-graph-&lt;your name&gt;-&lt;the day&gt;** blade, click **Overview**.
+9. On the **Overview** blade, make a note of the **Gremlin Endpoint** value, and then click **Data Explorer**.
 10. In the **GREMLIN API** pane, click **New Database**.
 11. On the **New Database** blade, in the **Database id** box, type **emaildatabase**, and then click **OK**.
 12. In the **GREMLIN API** pane, click **New Graph**.
@@ -808,9 +810,9 @@ In this stage, you will configure the Cosmos DB Emulator with collections that c
 #### Task 1: Create an Azure IoT Hub and a Stream Analytics Job
 
 1. In Internet Explorer, in the Azure portal, in the left panel, click **+ Create a resource**.
-2. On the **New** blade, in the Search box, type **IoT**, and then press Enter.
+2. On the **New** blade, in the **Search the Marketplace** box, type **IoT**, and then press Enter.
 3. On the **Everything** blade, click **IoT Hub**, and then click **Create**.
-4. On the **IoT hub** blade, on the **Basics** tab, under **Resource Group**, click **Use existing**, and then in the drop-down list, click **20777Mod07**.
+4. On the **IoT hub** blade, on the **Basics** tab, in the **Resource Group** drop-down list, click **20777Mod07**.
 5. In the **Region** drop-down list, click the region closest to your current location.
 6. In the **IoT Hub Name** box, type **20777a-iothub-&lt;your name\>-&lt;the day\>**, for example, **20777a-iothub-john-31**.
 7. On the **Size and Scale** tab, in the **Pricing and scale tier** drop-down list, click **B1: Basic tier**.
@@ -818,15 +820,15 @@ In this stage, you will configure the Cosmos DB Emulator with collections that c
 9. On the **Review + create** tab, click **Create**.
 10. Wait while the IoT Hub is created and deployed.
 11. In the left panel, click **All resources**, and then click **20777a-iothub-&lt;your name\>-&lt;the day\>**.
-12. On the **20777a-iothub-&lt;your name\>-&lt;the day\>** blade, under **SETTINGS**, click **Shared access policies**, and then click **device**.
+12. On the **20777a-iothub-&lt;your name\>-&lt;the day\>** blade, under **Settings**, click **Shared access policies**, and then click **device**.
 13. Make a note of the **Connection string-primary key** value.
 14. Close the **device** blade.
-15. On the **20777a-iothub-&lt;your name\>-&lt;the day\>** blade, under **EXPLORERS**, click **IoT devices**.
+15. On the **20777a-iothub-&lt;your name\>-&lt;the day\>** blade, under **Explorers**, click **IoT devices**.
 16. On the **IoT devices** blade, click **+ Add**.
 17. On the **Add Device** blade, in the **Device ID** box, type **Thermometer**.
 18. Leave the other settings as their default values, and then click **Save**.
 19. In the left panel, click **+ Create a resource**.
-20. On the **New** blade, in the Search box, type **Stream**, and then press Enter.
+20. On the **New** blade, in the **Search the Marketplace** box, type **Stream**, and then press Enter.
 21. On the **Everything** blade, click **Stream Analytics job**, and then click **Create**.
 22. On the **New Stream Analytics job** blade, in the **Job name** box, type **20777a-job-&lt;your name\>-&lt;the day\>**, for example, **20777a-job-john-31**.
 23. Under **Resource group**, click **Use existing**, and then in the drop-down list, click **20777Mod07**.
@@ -843,14 +845,14 @@ In this stage, you will configure the Cosmos DB Emulator with collections that c
 5. On the **Add Collection** blade, in the **Collection Id** box, type **Temperatures**.
 6. Under **Storage Capacity**, click **Unlimited**.
 7. In the **Partition key** box, type **/deviceid**, and then click **OK**.
-8. On the **20777a-sql-&lt;your name\>-&lt;the day\>** blade, under **SETTINGS**, click **Keys**.
+8. On the **20777a-sql-&lt;your name\>-&lt;the day\>** blade, under **Settings**, click **Keys**.
 9. Make a note of the **PRIMARY KEY** value.
 10. In the left panel, click **All resources**, and then click **20777a-job-&lt;your name\>-&lt;the day\>**.
-11. On the **20777a-job-&lt;your name\>-&lt;the day\>** blade, under **JOB TOPOLOGY**, click **Inputs**.
+11. On the **20777a-job-&lt;your name\>-&lt;the day\>** blade, under **Job topology**, click **Inputs**.
 12. Click **+ Add stream input**, and then click **IoT Hub**.
 13. On the **IoT Hub** blade, in the **Input alias** box, type **TemperatureDevicesHub**.
 14. In the **Shared access policy name** drop-down list, click **service**, and then click **Save**.
-15. On the **20777a-job-&lt;your name\>-&lt;the day\>** blade, under **JOB TOPOLOGY**, click **Outputs**.
+15. On the **20777a-job-&lt;your name\>-&lt;the day\>** blade, under **Job topology**, click **Outputs**.
 16. Click **+ Add**, and then click **Cosmos DB**.
 17. On the **Cosmos DB** blade, in the **Output alias** box, type **TemperatureDatabase**.
 18.  Click **Provide Cosmos DB settings manually**.
@@ -860,7 +862,7 @@ In this stage, you will configure the Cosmos DB Emulator with collections that c
 22.  In the **Collection name pattern** box, type **Temperatures**.
 23.  In the **Document id** box, type **id**, and then click **Save**.
 24. Wait while the connection to the output is verified and validated.
-25. On the **20777a-job-&lt;your name\>-&lt;the day\>** blade, under **JOB TOPOLOGY**, click **Query**.
+25. On the **20777a-job-&lt;your name\>-&lt;the day\>** blade, under **Job topology**, click **Query**.
 26. Specify the following query, and then click **Save**.
 
     ```SQL
@@ -948,7 +950,6 @@ In this stage, you will configure the Cosmos DB Emulator with collections that c
 6. On the **Are you sure you want to delete "20777Mod07"?**
  blade , in the **TYPE THE RESOURCE GROUP NAME** box, type **DatabricksGroup**, and then click **Delete**.
 7. Close Internet Explorer.
-
 
 ---
 ©2018 Microsoft Corporation. All rights reserved.
