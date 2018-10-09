@@ -63,7 +63,7 @@ This demonstration requires a Cosmos DB instance to be created in Azure; this mi
 5.	In Internet Explorer, go to **http://portal.azure.com**, and sign in using the Microsoft account that is associated with your Azure Learning Pass subscription.
 6.	In the Azure portal, in the left panel, click **Azure Cosmos DB**, and then click **+ Add**.
 7.	On the **Azure Cosmos DB** blade, under **Resource Group** click **Create new**, type **20777Mod06**, and then click **OK**
-8   In the **Account name** box, type **20777a-sql-\<your name\>-\<the day\>**, for example, **20777a-sql-john-31**.
+8.  In the **Account name** box, type **20777a-sql-\<your name\>-\<the day\>**, for example, **20777a-sql-john-31**.
 9.	In the **API** drop-down list, note the options available, and then click **SQL**.
 10.	In the **Location** drop-down list, click the region closest to your current location, click **Review + create**, and then click **Create**.
 11.	Wait for the Azure Cosmos DB to be created—this could take a few minutes.
