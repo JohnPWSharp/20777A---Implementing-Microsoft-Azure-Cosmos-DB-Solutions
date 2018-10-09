@@ -67,7 +67,7 @@ This demonstration requires a Cosmos DB instance to be created in Azure; this mi
 9.	In the **API** drop-down list, note the options available, and then click **SQL**.
 10.	In the **Location** drop-down list, click the region closest to your current location, click **Review + create**, and then click **Create**.
 11.	Wait for the Azure Cosmos DB to be created—this could take a few minutes.
-12.	On the **Azure Cosmos DB** blade, click **Refresh**, and then click **20777a-sql-\<your name\>-\<the day\>**.
+12.	In the Azure portal, in the left pane, click **All resources**, and then click **20777a-sql-\<your name\>-\<the day\>**.
 13.	On the **20777a-sql-\<your name\>-\<the day\>** blade, click **Data Explorer**, and then click **New Database**.
 14.	On the **New Database** blade, in the **Database id** box, type **MovieLens**, and then click **OK**.
 15.	In the **SQL API** pane, click **New Collection**.
