@@ -62,10 +62,10 @@ This demonstration requires a Cosmos DB instance to be created in Azure; this mi
 4.	Wait for the script to finish.
 5.	In Internet Explorer, go to **http://portal.azure.com**, and sign in using the Microsoft account that is associated with your Azure Learning Pass subscription.
 6.	In the Azure portal, in the left panel, click **Azure Cosmos DB**, and then click **+ Add**.
-7.	On the **Azure Cosmos DB** blade, in the **ID** box, type **20777a-sql-\<your name\>-\<the day\>**, for example, **20777a-sql-john-31**.
-8.	In the **API** drop-down list, note the options available, and then click **SQL**.
-9.	In the **Resource Group** box, type **20777Mod06**.
-10.	In the **Location** drop-down list, click the region closest to your current location, and then click **Create**.
+7.	On the **Azure Cosmos DB** blade, under **Resource Group** click **Create new**, type **20777Mod06**, and then click **OK**
+8   In the **Account name** box, type **20777a-sql-\<your name\>-\<the day\>**, for example, **20777a-sql-john-31**.
+9.	In the **API** drop-down list, note the options available, and then click **SQL**.
+10.	In the **Location** drop-down list, click the region closest to your current location, click **Review + create**, and then click **Create**.
 11.	Wait for the Azure Cosmos DB to be created—this could take a few minutes.
 12.	On the **Azure Cosmos DB** blade, click **Refresh**, and then click **20777a-sql-\<your name\>-\<the day\>**.
 13.	On the **20777a-sql-\<your name\>-\<the day\>** blade, click **Data Explorer**, and then click **New Database**.
@@ -318,10 +318,10 @@ If login is successful, you will be presented with a prompt that starts **sadmin
 
     ```
     val flightDatabaseConfig = Config(Map(
-    "Endpoint" -> "~URL~",
-    "Masterkey" -> "~Key~", 
-    "Database" -> "flightdelays",
-    "Collection" -> "delaydata"
+        "Endpoint" -> "~URL~",
+        "Masterkey" -> "~Key~", 
+        "Database" -> "flightdelays",
+        "Collection" -> "delaydata"
     ))
     ```
     
@@ -637,10 +637,10 @@ Complete the previous demonstration in this module.
 
     ```JSON
     dbConfig = {
-    "Endpoint" : host,
-    "Masterkey" : primaryKey,
-    "Database" : "flightdelays",
-    "Collection" : "delaydata"
+        "Endpoint" : host,
+        "Masterkey" : primaryKey,
+        "Database" : "flightdelays",
+        "Collection" : "delaydata"
     }
     ```
 
@@ -1005,9 +1005,9 @@ Complete the previous demonstration in this module.
 
 4.  In the **Resource group** box, click **Create new**, and then type **DatabricksGroup**.
 
-5.  In the **Location** drop-down list, click **West** **US 2**.
+5.  In the **Location** drop-down list, click **West US 2**.
 
-    >Currently, not all regions support the range of VMs used by Azure Databricks to host Spark clusters. West US 2 does.
+    > **Note**: Currently, not all regions support the range of VMs used by Azure Databricks to host Spark clusters. West US 2 does.
 
 6.  In the **Pricing Tier** drop-down list, click **Trial**, and then click **Create**.
 7.  Wait while the service is deployed.
