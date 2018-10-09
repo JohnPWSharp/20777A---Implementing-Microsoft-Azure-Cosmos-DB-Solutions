@@ -1141,7 +1141,7 @@ Complete the previous demonstration in this module.
 
 3.  On the **Are you sure you want to delete "20777aMod6"?** blade, in the **TYPE THE RESOURCE GROUP NAME** box, type **20777aMod6**, and then click **Delete**.
 
-4.  Repeat steps 2 to 4 for the **Databricks** entries.
+4.  Repeat steps 1 to 3 for the **Databricks** entries.
 
 ---
 © 2018 Microsoft Corporation. All rights reserved.
