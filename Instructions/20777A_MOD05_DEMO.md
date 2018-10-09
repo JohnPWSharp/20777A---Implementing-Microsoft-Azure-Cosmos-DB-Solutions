@@ -51,7 +51,7 @@ Before starting this demo:
 
 6.  Wait for the **Azure Cosmos DB** to be created—this could take a few minutes.
 
-7.  On the **Azure Cosmos DB** blade, click **Refresh**, and then click **20777a-mod5-graph-\<your name\>-\<the day\>**.
+7.  In the Azure portal, in the left pane, click **All resources**, and then click **20777a-mod5-graph-\<your name\>-\<the day\>**.
 
 #### Task 2: Create a graph database
 
