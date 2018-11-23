@@ -517,7 +517,7 @@ This demonstration assumes that you have completed the previous demonstrations i
 
 19. When you have finished, close Visual Studio and leave Internet Explorer open for the next demonstration. You will use the **Temperatures** collection in the next demonstration.
 
-## Lesson 3: Creating and Using Stored Procedures
+## Lesson 3: Using Triggers to Maintain Data Integrity
 
 ### Demo 3: Using Triggers to Verify Data Integrity
 
@@ -608,7 +608,7 @@ This block of code obtains the current time and adjusts it to match a .NET Frame
 
 9.  On the **New Trigger 1** tab, click **Save**.
 
-#### Task 2: Test the Stored Procedure Azure DocumentDB Studio
+#### Task 2: Test the Trigger Azure DocumentDB Studio
 
 > **Note**: Triggers are not executed automatically; you must specify the pre-trigger and/or post-trigger in the request options when you submit an insert, update, or delete request. You cannot test triggers from the Azure Portal Data Explorer because it does not provide the option to specify trigger names them when inserting, updating, or deleting documents. In this demonstration, you will use Azure Document DB Studio to execute some queries; Azure Document DB Studio allows you to specify trigger names.
 
