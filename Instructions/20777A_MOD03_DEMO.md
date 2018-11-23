@@ -13,11 +13,11 @@
         - [Task 1: Create a Stored Procedure](#task-1-create-a-stored-procedure)
         - [Task 2: Test the Stored Procedure using the Azure Portal](#task-2-test-the-stored-procedure-using-the-azure-portal)
         - [Task 3: Run the Stored Procedure From a SQL API Application](#task-3-run-the-stored-procedure-from-a-sql-api-application)
-  - [Lesson 3: Creating and Using Stored Procedures](#lesson-3-creating-and-using-stored-procedures)
+  - [Lesson 3: Using Triggers to Maintain Data Integrity](#lesson-3-using-triggers-to-maintain-data-integrity)
     - [Demo 3: Using Triggers to Verify Data Integrity](#demo-3-using-triggers-to-verify-data-integrity)
         - [Preparation](#preparation)
         - [Task 1: Create a Pre-Trigger](#task-1-create-a-pre-trigger)
-        - [Task 2: Test the Stored Procedure Azure DocumentDB Studio](#task-2-test-the-stored-procedure-azure-documentdb-studio)
+        - [Task 2: Test the Trigger using Azure DocumentDB Studio](#task-2-test-the-trigger-using-azure-documentdb-studio)
         - [Task 3: Invoke the Trigger From a SQL API Application](#task-3-invoke-the-trigger-from-a-sql-api-application)
         - [Task 4: Delete the Azure resources](#task-4-delete-the-azure-resources)
   
@@ -608,7 +608,7 @@ This block of code obtains the current time and adjusts it to match a .NET Frame
 
 9.  On the **New Trigger 1** tab, click **Save**.
 
-#### Task 2: Test the Trigger Azure DocumentDB Studio
+#### Task 2: Test the Trigger using Azure DocumentDB Studio
 
 > **Note**: Triggers are not executed automatically; you must specify the pre-trigger and/or post-trigger in the request options when you submit an insert, update, or delete request. You cannot test triggers from the Azure Portal Data Explorer because it does not provide the option to specify trigger names them when inserting, updating, or deleting documents. In this demonstration, you will use Azure Document DB Studio to execute some queries; Azure Document DB Studio allows you to specify trigger names.
 
