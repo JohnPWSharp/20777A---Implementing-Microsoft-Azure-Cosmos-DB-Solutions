@@ -8,7 +8,7 @@
       - [Task 2: Test Session Consistency in a Single Client](#task-2-test-session-consistency-in-a-single-client)
       - [Task 3: Test Eventual Consistency in a Single Client](#task-3-test-eventual-consistency-in-a-single-client)
       - [Task 4: Test Consistency Across Multiple Clients](#task-4-test-consistency-across-multiple-clients)
-      - [Task 5: Drop the TestDatabase database (to save costs).](#task-5-drop-the-testdatabase-database-to-save-costs)
+      - [Task 5: Drop the TestDatabase database](#task-5-drop-the-testdatabase-database)
     - [Demo 2: Understanding the Impact of Partitioning and Index Policy](#demo-2-understanding-the-impact-of-partitioning-and-index-policy)
       - [Preparation](#preparation-1)
       - [Task 1: Test the Effects of Index Policy on Insert Operations](#task-1-test-the-effects-of-index-policy-on-insert-operations)
@@ -20,6 +20,7 @@
       - [Preparation](#preparation-2)
       - [Task 1: Examine How Consistency Affects Throughput](#task-1-examine-how-consistency-affects-throughput)
       - [Task 2: Examine the Physical to Logical Mapping of Partitions](#task-2-examine-the-physical-to-logical-mapping-of-partitions)
+      - [Task 3: Demonstration clean up](#task-3-demonstration-clean-up)
 
 ## Lesson 1: Optimizing database performance
 
@@ -49,7 +50,7 @@ Before starting this demo:
 
 9. In the **API** drop-down list, click **Core (SQL)**.
 
-10. In the **Location** drop-down list, click **UK West**, click **Review + create**, and then click **Create**.
+10. In the **Location** drop-down list, click your nearest location, click **Review + create**, and then click **Create**.
 
 11. Wait for the Azure Cosmos DB to be created—this could take a few minutes.
 
@@ -71,7 +72,7 @@ Before starting this demo:
 
 20. In the **Collection Id** box, type **Temperatures**.
 
-21. In the **Partition key** box, type **/deviceID**, and then click **OK**.
+21. In the **Partition key** box, type **/deviceID**, set the **Throughput** to **1000**, and then click **OK**.
 
     > **Note**: preparation steps 22 to 25 download and build the latest version of the Cosmos DB data migration tool. You do not need to carry out these step if you completed it in an earlier module (and already have a **E:\\dmt** folder on **20777A-LON-DEV**); if you already completed these steps, skip ahead to step 26.
 
@@ -81,7 +82,7 @@ Before starting this demo:
 
 24. If the **Open File - Security Warning** dialog box appears, click **Open**.
 
-25. Wait for the script to finish, and then press Enter.
+25. Wait for the script to finish.
 
 26. In Internet Explorer, on the **20777a-sql-\<*your name\>-\<the day*\>** blade, under **Settings**, click **Keys**.
 
@@ -116,19 +117,18 @@ Before starting this demo:
 
         ```JSON
         {
-        "docid": "doc0",
-        "value": 0,
-        "id": "9415ba5a-5917-4b91-91d1-b40438f6f30a",
-        "_rid": "d51LAORzMwABAAAAAAAAAA==",
-        "_self": "dbs/d51LAA==/colls/d51LAORzMwA=/docs/d51LAORzMwABAAAAAAAAAA==/",
-        "_etag": "\"00005f06-0000-0000-0000-5b5098810000\"",
-        "_attachments": "attachments/",
-        "_ts": 1532008577
+            "docid": "doc0",
+            "value": 0,
+            "id": "9415ba5a-5917-4b91-91d1-b40438f6f30a",
+            "_rid": "d51LAORzMwABAAAAAAAAAA==",
+            "_self": "dbs/d51LAA==/colls/d51LAORzMwA=/docs/d51LAORzMwABAAAAAAAAAA==/",
+            "_etag": "\"00005f06-0000-0000-0000-5b5098810000\"",
+            "_attachments": "attachments/",
+            "_ts": 1532008577
         }
         ```
 
     - The **WaitForCollection** method which waits for the newly created collection to be replicated across regions.
-
 
 6. Examine the **StartWritingAsync** method in more detail. This method queries the docs in the collection at random, and increments the number in the **value** field in the selected doc before writing it back to the collection. This process is performed repeatedly (see the **NumIterations** setting described below). For each iteration, the method repeatedly retrieves the same doc until the data in the **value** field is the same for two successive reads, before performing the increment. The results of each read for each iteration are written to a CSV file. In a system configured to use eventual consistency, there is the possibility that the write for a previous iteration (or two) might not be immediately visible. Repeating the reads until the same value is read twice in succession captures how the data changes as it is saved between replicas (and database nodes, even in a non-replicated environment). Note that this approach is not foolproof, and it is possible that some updates might still be lost (if you wait long enough, updates will always appear, but how long is **long enough**?), but this demo is intended simply to illustrate the effects of (in)consistency\!
 
@@ -178,6 +178,7 @@ Before starting this demo:
     ...
     636676075345484458,199,Writer,UK West,doc0,200,199
     ```
+
 13. Close Notepad.
 
 #### Task 3: Test Eventual Consistency in a Single Client
@@ -290,43 +291,44 @@ Before starting this demo:
 15. In Notepad, examine the contents of the file. Initially the file should contain a number of lines for the writer, while the readers are getting started. The output should be similar to that shown before, and sometimes the writer may have to perform multiple reads to wait for the data to settle (this run of the app is using Eventual consistency).
     - Scroll through the file, and look for the output of the readers. You should see lines that resemble the following. In the fragment below, the writer has written the value 48 to the doc. Reader 2 and Reader 0 both read this latest value, but Reader 3 and Reader 4 see an earlier value, 46. Additionally, while Reader 1 sees the latest value initially, a subsequent request by the same reader fetches an earlier value, 47. You should see this phenomena occur regularly throughout the file.
 
-    ```Text
-    636679496897053516,48,Writer,UK West,doc0,48,47
-    636679496897063528,5,Reader 2,UK West,doc0,48
-    636679496897114146,5,Reader 0,UK West,doc0,48
-    636679496897273626,5,Reader 3,UK West,doc0,46
-    636679496897293512,6,Reader 4,UK West,doc0,46
-    636679496897343528,6,Reader 1,UK West,doc0,48
-    636679496897363489,6,Reader 2,UK West,doc0,48
-    636679496897403513,6,Reader 0,UK West,doc0,46
-    636679496897563501,7,Reader 4,UK West,doc0,46
-    636679496897593514,6,Reader 3,UK West,doc0,48
-    636679496897645188,7,Reader 1,UK West,doc0,47
-    636679496897653480,7,Reader 2,UK West,doc0,48
-    636679496897703484,7,Reader 0,UK West,doc0,48
-    636679496897833484,8,Reader 4,UK West,doc0,48
-    636679496897913513,7,Reader 3,UK West,doc0,48
-    636679496897933493,8,Reader 1,UK West,doc0,48
-    636679496897953496,8,Reader 2,UK West,doc0,48
-    636679496898005103,8,Reader 0,UK West,doc0,47
-    636679496898063522,49,Writer,UK West,doc0,49,48
-    636679496898103525,9,Reader 4,UK West,doc0,49
-    636679496898243492,9,Reader 1,UK West,doc0,47
-    636679496898243492,9,Reader 2,UK West,doc0,49
-    636679496898253549,8,Reader 3,UK West,doc0,47
-    636679496898313469,9,Reader 0,UK West,doc0,47
-    636679496898363900,10,Reader 4,UK West,doc0,49
-    636679496898553509,10,Reader 1,UK West,doc0,49
-    636679496898563518,10,Reader 2,UK West,doc0,49
-    636679496898603475,10,Reader 0,UK West,doc0,49
-    636679496898633483,11,Reader 4,UK West,doc0,49
-    636679496898633483,9,Reader 3,UK West,doc0,49
-    636679496898853539,11,Reader 1,UK West,doc0,48
-    636679496898893712,11,Reader 0,UK West,doc0,49
-    636679496898893712,11,Reader 2,UK West,doc0,49
-    636679496898923528,12,Reader 4,UK West,doc0,49
-    636679496898943493,10,Reader 3,UK West,doc0,49
-    ```
+        ```Text
+        636679496897053516,48,Writer,UK West,doc0,48,47
+        636679496897063528,5,Reader 2,UK West,doc0,48
+        636679496897114146,5,Reader 0,UK West,doc0,48
+        636679496897273626,5,Reader 3,UK West,doc0,46
+        636679496897293512,6,Reader 4,UK West,doc0,46
+        636679496897343528,6,Reader 1,UK West,doc0,48
+        636679496897363489,6,Reader 2,UK West,doc0,48
+        636679496897403513,6,Reader 0,UK West,doc0,46
+        636679496897563501,7,Reader 4,UK West,doc0,46
+        636679496897593514,6,Reader 3,UK West,doc0,48
+        636679496897645188,7,Reader 1,UK West,doc0,47
+        636679496897653480,7,Reader 2,UK West,doc0,48
+        636679496897703484,7,Reader 0,UK West,doc0,48
+        636679496897833484,8,Reader 4,UK West,doc0,48
+        636679496897913513,7,Reader 3,UK West,doc0,48
+        636679496897933493,8,Reader 1,UK West,doc0,48
+        636679496897953496,8,Reader 2,UK West,doc0,48
+        636679496898005103,8,Reader 0,UK West,doc0,47
+        636679496898063522,49,Writer,UK West,doc0,49,48
+        636679496898103525,9,Reader 4,UK West,doc0,49
+        636679496898243492,9,Reader 1,UK West,doc0,47
+        636679496898243492,9,Reader 2,UK West,doc0,49
+        636679496898253549,8,Reader 3,UK West,doc0,47
+        636679496898313469,9,Reader 0,UK West,doc0,47
+        636679496898363900,10,Reader 4,UK West,doc0,49
+        636679496898553509,10,Reader 1,UK West,doc0,49
+        636679496898563518,10,Reader 2,UK West,doc0,49
+        636679496898603475,10,Reader 0,UK West,doc0,49
+        636679496898633483,11,Reader 4,UK West,doc0,49
+        636679496898633483,9,Reader 3,UK West,doc0,49
+        636679496898853539,11,Reader 1,UK West,doc0,48
+        636679496898893712,11,Reader 0,UK West,doc0,49
+        636679496898893712,11,Reader 2,UK West,doc0,49
+        636679496898923528,12,Reader 4,UK West,doc0,49
+        636679496898943493,10,Reader 3,UK West,doc0,49
+        ```
+
 16. Close Notepad.
 
 17. In File Explorer, delete **E:\\Demofiles\\Mod04\\Results.csv**.
@@ -342,6 +344,7 @@ Before starting this demo:
     ```Powershell
     Get-Content *.csv | Sort-Object | Out-File Results.csv
     ```
+
 22. In File Explorer, navigate to **E:\\Demofiles\\Mod04**, right-click **Results.csv**, and then click **Edit**.
 
 23. In Notepad, examine the data. This time the app is using Session consistency, so the writer will always see the data it last wrote and there should not be any rows showing repeated read operations. Additionally, as the readers all share the same session token as the most recent write operation, they should all see the same, most recent value of the data, as shown in the example output below:
@@ -376,15 +379,15 @@ Before starting this demo:
     636679518976358715,4,Reader 1,UK West,doc0,56
     ```
 
-24. Close Notepad, close PowerShell, and then close Visual Studio.
+    > **Note:** You might find occassionally that a reader reports a new value immediately before the message form the writer that sets that specific value. This is due to a race hazard in the code rather than the reader being able to predict in advance what the new value should be!
 
-#### Task 5: Drop the TestDatabase database (to save costs).
+24. Close Notepad, close PowerShell, and then close Visual Studio 2017.
 
-1. In Internet Explorer, on the **20777a-sql-\<*your name\>-\<the day*\>** blade, click **Data Explorer**.
+#### Task 5: Drop the TestDatabase database
 
-2. In the **SQL API** pane, right-click **TestDatabase**, and then click **Delete Database**.
+1. In Internet Explorer, on the **Data Explorer** blade, in the **SQL API** pane, right-click **TestDatabase**, and then click **Delete Database**.
 
-3. On the **Delete Database** blade, in the **Confirm by typing the database id** box, type **TestDatabase**, and then click **OK**.
+2. On the **Delete Database** blade, in the **Confirm by typing the database id** box, type **TestDatabase**, and then click **OK**.
 
 ### Demo 2: Understanding the Impact of Partitioning and Index Policy
 
@@ -422,13 +425,15 @@ Before starting this demo:
 
 5. Make a note of the **PRIMARY CONNECTION STRING** value.
 
-    > **Note**: preparation steps 6 to 8 download and build the latest version of the Cosmos DB data migration tool. You do not need to carry out these step if you completed it in an earlier module (and already have a **E:\\dmt** folder on **20777A-LON-DEV**); if you already completed these steps, skip ahead to the next task.
+    > **Note**: preparation steps 6 to 9 download and build the latest version of the Cosmos DB data migration tool. You do not need to carry out these step if you completed it in an earlier module (and already have a **E:\\dmt** folder on **20777A-LON-DEV**); if you already completed these steps, skip ahead to the next task.
 
 6. On the toolbar, click **File Explorer**.
 
 7. In File Explorer, navigate to **E:\\Resources**, right-click **build\_data\_migration\_tool.ps1**, and then click **Run with PowerShell**.
 
-8. Wait for the script to finish, and then press Enter.
+8. If the **Open File - Security Warning** dialog box appears, click **Open**.
+
+9. Wait for the script to finish, and then press Enter.
 
 #### Task 1: Test the Effects of Index Policy on Insert Operations
 
@@ -540,7 +545,7 @@ Before starting this demo:
 
 36. Wait for the operation to finish, and verify that it imports 3939 documents.
 
-    > **Note:** If you decide later that you do require an index over the **innings** data, you can modify the index policy for the collection using the Azure portal.
+    > **Note:** If you decide later that you do require an index over the **innings** data, you can modify the indexing policy for the collection using the Azure portal.
 
 #### Task 2: Create Collections with Different Partitioning Strategies
 
@@ -656,7 +661,7 @@ Before starting this demo:
     Query: Find all T20 games, Elapsed Time: 347 ms
     ```
 
-16. In File Explorer, double-click **MatchesPartitionedByHomeTeam.txt**. This file contains the statistics for the queries run using the collection partitioned by the home team. Note that the query that searches for data for the away team takes significantly longer than searching by the home team. Also, the query that searches for games played between two teams can also take advantage of the partitioning structure; one of the teams is the home team:
+16. In File Explorer, double-click **MatchesPartitionedByHomeTeam.txt**. This file contains the statistics for the queries run using the collection partitioned by the home team. Note that the query that searches for data for the away team takes significantly longer than searching by the home team:
 
     ```Text
     Performance stats using collection MatchesPartitionedByHomeTeam
@@ -674,7 +679,7 @@ Before starting this demo:
     Query: Find all T20 games, Elapsed Time: 490 ms
     ```
 
-17. In File Explorer, double-click **MatchesPartitionedByAwayTeam.txt**. This file contains the statistics for the queries run using the collection partitioned by the away team. This time, the query that fetches data using the away team runs faster than the query that specifies the home team. Again, the query that searches for games played between two teams can take advantage of the partitioning structure as one of the teams is the away team:
+17. In File Explorer, double-click **MatchesPartitionedByAwayTeam.txt**. This file contains the statistics for the queries run using the collection partitioned by the away team. This time, the query that fetches data using the away team runs faster than the query that specifies the home team:
 
     ```Text
     Performance stats using collection MatchesPartitionedByAwayTeam
@@ -693,7 +698,7 @@ Before starting this demo:
     Query: Find all T20 games, Elapsed Time: 594 ms
     ```
 
-18. In File Explorer, double-click **MatchesPartitionedByMatchType.txt**. This file contains the statistics for the queries run using the collection partitioned by the match type. The performance of the query that finds matches by city does not appear to have improved much. The reason for this is that there are only three match types (T20, ODI, and Test). Partitioning across a field that has a small number of distinct values is not as beneficial as partitioning across a field that has a large number of values:
+18. In File Explorer, double-click **MatchesPartitionedByMatchType.txt**. This file contains the statistics for the queries run using the collection partitioned by the match type. The performance of the queries that retrieve particular types of matches (T20, ODI) does not seem to have improved much compared to the initial non-partitioned collection. The reason for this is that there are only three match types (T20, ODI, and Test). Partitioning across a field that has a small number of distinct values is not as beneficial as partitioning across a field that has a large number of values:
 
     ```Text
     Performance stats using collection MatchesPartitionedByMatchType
@@ -711,441 +716,30 @@ Before starting this demo:
     Query: Find all T20 games, Elapsed Time: 457 ms
     Query: Find all T20 games, Elapsed Time: 475 ms
     ```
-19. Close all open instances of Notepad.
 
-20. In File Explorer, delete all the text files in the **E:\\Demofiles\\Mod04** folder.
+19. Finally, in File Explorer, double-click **MatchesPartitionedByCity.txt**. This file should show that the query that finds matches played in Nottingham run more quickly than previously.
 
-21. In Visual Studio 2017, on the **Debug** menu, click **Start Debugging**.
+20. Close all open instances of Notepad.
 
-22. At the **Which mode?** prompt, type **1**, and wait for the app to finish. This mode generates comprehensive query metrics rather than the elapsed timings gathered previously. The elapsed times were a rather crude measure that includes many variables, such as the time taken to pass data across the network, and the performance of the client. They are useful as a guide, but the detailed query metrics provide a better view of how a query is run by Cosmos DB.
+21. In File Explorer, delete all the text files in the **E:\\Demofiles\\Mod04** folder.
 
-23. In File Explorer, double-click **Matches.txt**. This file should now contain the detailed metrics for the queries using the **Matches** non-partitioned and fully indexed collection. It should look similar to the following. As before, you can ignore the first set of stats for each query and use the second set as the base benchmark for comparison purposes. The key figures to look at are the **Request Charge** and the **Run Time (ms)** value in the **Scheduling Metrics** table:
+22. In Visual Studio 2017, on the **Debug** menu, click **Start Debugging**.
 
-    ```Text
-    Performance stats using collection Matches
-    =====================================================================
+23. At the **Which mode?** prompt, type **1**, and wait for the app to finish. This mode generates comprehensive query metrics rather than the elapsed timings gathered previously. The elapsed times were a rather crude measure that includes many variables, such as the time taken to pass data across the network, and the performance of the client. They are useful as a guide, but the detailed query metrics provide a better view of how a query is run by Cosmos DB.
 
+24. In File Explorer, double-click **Matches.txt**. This file should now contain the detailed metrics for the queries using the **Matches** non-partitioned and fully indexed collection. It should look similar to the following. As before, you can ignore the first set of stats for each query and use the second set as the base benchmark for comparison purposes. The key figures to look at are the **Request Charge** field directly above the **Partition Execution Timeline** table, and the **Run Time (ms)** value in the **Scheduling Metrics** table.
 
-    Query: Find T20 games for England at home
-    ---------------------------------------------------------------
+25. In File Explorer, double-click **MatchesPartitionedByHomeTeam.txt**. Compare the values of the **Run Time (ms)** for each query of those in the **Matches.txt** file. For the queries **Find T20 games for England at home** and **Find ODIs played in England between England and Australia**, the timings should be faster due to the way in which the data is partitioned. Also, verify that the **Request Charge** for the corresponding queries are the same in both files.
 
-    [0, Retrieved Document Count                 :              87
-    Retrieved Document Size                  :       2,763,363 bytes
-    Output Document Count                    :              87
-    Output Document Size                     :               0 bytes
-    Index Utilization                        :          100.00 %
-    Total Query Execution Time               :           12.31 milliseconds
-      Query Preparation Times
-        Query Compilation Time               :            0.12 milliseconds
-        Logical Plan Build Time              :            0.04 milliseconds
-        Physical Plan Build Time             :            0.06 milliseconds
-        Query Optimization Time              :            0.01 milliseconds
-      Index Lookup Time                      :            0.15 milliseconds
-      Document Load Time                     :           10.67 milliseconds
-      Runtime Execution Times
-        Query Engine Execution Time          :            0.85 milliseconds
-        System Function Execution Time       :            0.00 milliseconds
-        User-defined Function Execution Time :            0.00 milliseconds
-      Document Write Time                    :            0.16 milliseconds
-      Client Side Metrics
-        Retry Count                          :               0
-        Request Charge                       :           44.12 RUs
-
-      Partition Execution Timeline
-      ┌────────────┬────────────────┬───────────────┬───────────────────┬───────────┐
-      │Partition Id│Start Time (UTC)│End Time (UTC) │Number of Documents│Retry Count│
-      ├────────────┼────────────────┼───────────────┼───────────────────┼───────────┤
-      │           0│ 01:27:57.470579│01:27:57.618499│                 87│          0│
-      └────────────┴────────────────┴───────────────┴───────────────────┴───────────┘
-
-      Scheduling Metrics
-      ┌────────────┬────────────────────┬────────────────────┬────────────────────┬────────────────────┬─────────────────────┐
-      │Partition Id│Response Time (ms)  │Run Time (ms)       │Wait Time (ms)      │Turnaround Time (ms)│Number of Preemptions│
-      ├────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┼─────────────────────┤
-      │           0│               15.10│              147.51│               17.03│              164.54│                    1│
-      └────────────┴────────────────────┴────────────────────┴────────────────────┴────────────────────┴─────────────────────┘
-    ]
-
-
-    Query: Find T20 games for England at home
-    ---------------------------------------------------------------
-
-    [0, Retrieved Document Count                 :              87
-    Retrieved Document Size                  :       2,763,363 bytes
-    Output Document Count                    :              87
-    Output Document Size                     :               0 bytes
-    Index Utilization                        :          100.00 %
-    Total Query Execution Time               :           12.07 milliseconds
-      Query Preparation Times
-        Query Compilation Time               :            0.12 milliseconds
-        Logical Plan Build Time              :            0.04 milliseconds
-        Physical Plan Build Time             :            0.06 milliseconds
-        Query Optimization Time              :            0.01 milliseconds
-      Index Lookup Time                      :            0.19 milliseconds
-      Document Load Time                     :           10.31 milliseconds
-      Runtime Execution Times
-        Query Engine Execution Time          :            0.98 milliseconds
-        System Function Execution Time       :            0.00 milliseconds
-        User-defined Function Execution Time :            0.00 milliseconds
-      Document Write Time                    :            0.14 milliseconds
-      Client Side Metrics
-        Retry Count                          :               0
-        Request Charge                       :           44.12 RUs
-
-      Partition Execution Timeline
-      ┌────────────┬────────────────┬───────────────┬───────────────────┬───────────┐
-      │Partition Id│Start Time (UTC)│End Time (UTC) │Number of Documents│Retry Count│
-      ├────────────┼────────────────┼───────────────┼───────────────────┼───────────┤
-      │           0│ 01:27:57.688399│01:27:57.773990│                 87│          0│
-      └────────────┴────────────────┴───────────────┴───────────────────┴───────────┘
-
-      Scheduling Metrics
-      ┌────────────┬────────────────────┬────────────────────┬────────────────────┬────────────────────┬─────────────────────┐
-      │Partition Id│Response Time (ms)  │Run Time (ms)       │Wait Time (ms)      │Turnaround Time (ms)│Number of Preemptions│
-      ├────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┼─────────────────────┤
-      │           0│                0.02│               85.59│                0.04│               85.63│                    1│
-      └────────────┴────────────────────┴────────────────────┴────────────────────┴────────────────────┴─────────────────────┘
-    ]
-
-
-    Query: Find T20 games for England away
-    ---------------------------------------------------------------
-
-    [0, Retrieved Document Count                 :              40
-    Retrieved Document Size                  :       1,278,504 bytes
-    Output Document Count                    :              40
-    Output Document Size                     :               0 bytes
-    Index Utilization                        :          100.00 %
-    Total Query Execution Time               :            5.84 milliseconds
-      Query Preparation Times
-        Query Compilation Time               :            0.16 milliseconds
-        Logical Plan Build Time              :            0.04 milliseconds
-        Physical Plan Build Time             :            0.06 milliseconds
-        Query Optimization Time              :            0.01 milliseconds
-      Index Lookup Time                      :            0.29 milliseconds
-      Document Load Time                     :            4.53 milliseconds
-      Runtime Execution Times
-        Query Engine Execution Time          :            0.36 milliseconds
-        System Function Execution Time       :            0.00 milliseconds
-        User-defined Function Execution Time :            0.00 milliseconds
-      Document Write Time                    :            0.05 milliseconds
-      Client Side Metrics
-        Retry Count                          :               0
-        Request Charge                       :           22.07 RUs
-
-      Partition Execution Timeline
-      ┌────────────┬────────────────┬───────────────┬───────────────────┬───────────┐
-      │Partition Id│Start Time (UTC)│End Time (UTC) │Number of Documents│Retry Count│
-      ├────────────┼────────────────┼───────────────┼───────────────────┼───────────┤
-      │           0│ 01:27:57.798422│01:27:57.887827│                 40│          0│
-      └────────────┴────────────────┴───────────────┴───────────────────┴───────────┘
-
-      Scheduling Metrics
-      ┌────────────┬────────────────────┬────────────────────┬────────────────────┬────────────────────┬─────────────────────┐
-      │Partition Id│Response Time (ms)  │Run Time (ms)       │Wait Time (ms)      │Turnaround Time (ms)│Number of Preemptions│
-      ├────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┼─────────────────────┤
-      │           0│                0.02│               89.40│                0.05│               89.45│                    1│
-      └────────────┴────────────────────┴────────────────────┴────────────────────┴────────────────────┴─────────────────────┘
-    ]
-
-
-    Query: Find T20 games for England away
-    ---------------------------------------------------------------
-
-    [0, Retrieved Document Count                 :              40
-    Retrieved Document Size                  :       1,278,504 bytes
-    Output Document Count                    :              40
-    Output Document Size                     :               0 bytes
-    Index Utilization                        :          100.00 %
-    Total Query Execution Time               :            5.67 milliseconds
-      Query Preparation Times
-        Query Compilation Time               :            0.12 milliseconds
-        Logical Plan Build Time              :            0.04 milliseconds
-        Physical Plan Build Time             :            0.12 milliseconds
-        Query Optimization Time              :            0.01 milliseconds
-      Index Lookup Time                      :            0.15 milliseconds
-      Document Load Time                     :            4.61 milliseconds
-      Runtime Execution Times
-        Query Engine Execution Time          :            0.34 milliseconds
-        System Function Execution Time       :            0.00 milliseconds
-        User-defined Function Execution Time :            0.00 milliseconds
-      Document Write Time                    :            0.05 milliseconds
-      Client Side Metrics
-        Retry Count                          :               0
-        Request Charge                       :           22.07 RUs
-
-      Partition Execution Timeline
-      ┌────────────┬────────────────┬───────────────┬───────────────────┬───────────┐
-      │Partition Id│Start Time (UTC)│End Time (UTC) │Number of Documents│Retry Count│
-      ├────────────┼────────────────┼───────────────┼───────────────────┼───────────┤
-      │           0│ 01:27:57.977398│01:27:58.031464│                 40│          0│
-      └────────────┴────────────────┴───────────────┴───────────────────┴───────────┘
-
-      Scheduling Metrics
-      ┌────────────┬────────────────────┬────────────────────┬────────────────────┬────────────────────┬─────────────────────┐
-      │Partition Id│Response Time (ms)  │Run Time (ms)       │Wait Time (ms)      │Turnaround Time (ms)│Number of Preemptions│
-      ├────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┼─────────────────────┤
-      │           0│                0.02│               54.06│                0.04│               54.10│                    1│
-      └────────────┴────────────────────┴────────────────────┴────────────────────┴────────────────────┴─────────────────────┘
-    ]
-
-
-    Query: Find ODIs played in England between England and Australia
-    ---------------------------------------------------------------
-
-    [0, Retrieved Document Count                 :              35
-    Retrieved Document Size                  :       2,558,870 bytes
-    Output Document Count                    :              35
-    Output Document Size                     :               0 bytes
-    Index Utilization                        :          100.00 %
-    Total Query Execution Time               :            8.41 milliseconds
-      Query Preparation Times
-        Query Compilation Time               :            0.16 milliseconds
-        Logical Plan Build Time              :            0.04 milliseconds
-        Physical Plan Build Time             :            0.12 milliseconds
-        Query Optimization Time              :            0.01 milliseconds
-      Index Lookup Time                      :            0.20 milliseconds
-      Document Load Time                     :            7.15 milliseconds
-      Runtime Execution Times
-        Query Engine Execution Time          :            0.36 milliseconds
-        System Function Execution Time       :            0.00 milliseconds
-        User-defined Function Execution Time :            0.00 milliseconds
-      Document Write Time                    :            0.06 milliseconds
-      Client Side Metrics
-        Retry Count                          :               0
-        Request Charge                       :           30.86 RUs
-
-      Partition Execution Timeline
-      ┌────────────┬────────────────┬───────────────┬───────────────────┬───────────┐
-      │Partition Id│Start Time (UTC)│End Time (UTC) │Number of Documents│Retry Count│
-      ├────────────┼────────────────┼───────────────┼───────────────────┼───────────┤
-      │           0│ 01:27:58.088415│01:27:58.138720│                 35│          0│
-      └────────────┴────────────────┴───────────────┴───────────────────┴───────────┘
-
-      Scheduling Metrics
-      ┌────────────┬────────────────────┬────────────────────┬────────────────────┬────────────────────┬─────────────────────┐
-      │Partition Id│Response Time (ms)  │Run Time (ms)       │Wait Time (ms)      │Turnaround Time (ms)│Number of Preemptions│
-      ├────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┼─────────────────────┤
-      │           0│                0.03│               50.30│                0.06│               50.36│                    1│
-      └────────────┴────────────────────┴────────────────────┴────────────────────┴────────────────────┴─────────────────────┘
-    ]
-
-
-    Query: Find ODIs played in England between England and Australia
-    ---------------------------------------------------------------
-
-    [0, Retrieved Document Count                 :              35
-    Retrieved Document Size                  :       2,558,870 bytes
-    Output Document Count                    :              35
-    Output Document Size                     :               0 bytes
-    Index Utilization                        :          100.00 %
-    Total Query Execution Time               :            8.62 milliseconds
-      Query Preparation Times
-        Query Compilation Time               :            0.11 milliseconds
-        Logical Plan Build Time              :            0.09 milliseconds
-        Physical Plan Build Time             :            0.09 milliseconds
-        Query Optimization Time              :            0.01 milliseconds
-      Index Lookup Time                      :            0.17 milliseconds
-      Document Load Time                     :            7.40 milliseconds
-      Runtime Execution Times
-        Query Engine Execution Time          :            0.42 milliseconds
-        System Function Execution Time       :            0.00 milliseconds
-        User-defined Function Execution Time :            0.00 milliseconds
-      Document Write Time                    :            0.05 milliseconds
-      Client Side Metrics
-        Retry Count                          :               0
-        Request Charge                       :           30.86 RUs
-
-      Partition Execution Timeline
-      ┌────────────┬────────────────┬───────────────┬───────────────────┬───────────┐
-      │Partition Id│Start Time (UTC)│End Time (UTC) │Number of Documents│Retry Count│
-      ├────────────┼────────────────┼───────────────┼───────────────────┼───────────┤
-      │           0│ 01:27:58.198436│01:27:58.250340│                 35│          0│
-      └────────────┴────────────────┴───────────────┴───────────────────┴───────────┘
-
-      Scheduling Metrics
-      ┌────────────┬────────────────────┬────────────────────┬────────────────────┬────────────────────┬─────────────────────┐
-      │Partition Id│Response Time (ms)  │Run Time (ms)       │Wait Time (ms)      │Turnaround Time (ms)│Number of Preemptions│
-      ├────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┼─────────────────────┤
-      │           0│                0.04│               51.90│                0.07│               51.97│                    1│
-      └────────────┴────────────────────┴────────────────────┴────────────────────┴────────────────────┴─────────────────────┘
-    ]
-
-
-    Query: Find all games played in Nottingham
-    ---------------------------------------------------------------
-
-    [0, Retrieved Document Count                 :              38
-    Retrieved Document Size                  :       3,230,737 bytes
-    Output Document Count                    :              38
-    Output Document Size                     :               0 bytes
-    Index Utilization                        :          100.00 %
-    Total Query Execution Time               :           13.76 milliseconds
-      Query Preparation Times
-        Query Compilation Time               :            0.08 milliseconds
-        Logical Plan Build Time              :            0.02 milliseconds
-        Physical Plan Build Time             :            0.04 milliseconds
-        Query Optimization Time              :            0.00 milliseconds
-      Index Lookup Time                      :            0.06 milliseconds
-      Document Load Time                     :           12.67 milliseconds
-      Runtime Execution Times
-        Query Engine Execution Time          :            0.63 milliseconds
-        System Function Execution Time       :            0.00 milliseconds
-        User-defined Function Execution Time :            0.00 milliseconds
-      Document Write Time                    :            0.05 milliseconds
-      Client Side Metrics
-        Retry Count                          :               0
-        Request Charge                       :           35.35 RUs
-
-      Partition Execution Timeline
-      ┌────────────┬────────────────┬───────────────┬───────────────────┬───────────┐
-      │Partition Id│Start Time (UTC)│End Time (UTC) │Number of Documents│Retry Count│
-      ├────────────┼────────────────┼───────────────┼───────────────────┼───────────┤
-      │           0│ 01:27:58.301464│01:27:58.358922│                 38│          0│
-      └────────────┴────────────────┴───────────────┴───────────────────┴───────────┘
-
-      Scheduling Metrics
-      ┌────────────┬────────────────────┬────────────────────┬────────────────────┬────────────────────┬─────────────────────┐
-      │Partition Id│Response Time (ms)  │Run Time (ms)       │Wait Time (ms)      │Turnaround Time (ms)│Number of Preemptions│
-      ├────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┼─────────────────────┤
-      │           0│                0.03│               57.45│                0.06│               57.51│                    1│
-      └────────────┴────────────────────┴────────────────────┴────────────────────┴────────────────────┴─────────────────────┘
-    ]
-
-
-    Query: Find all games played in Nottingham
-    ---------------------------------------------------------------
-
-    [0, Retrieved Document Count                 :              38
-    Retrieved Document Size                  :       3,230,737 bytes
-    Output Document Count                    :              38
-    Output Document Size                     :               0 bytes
-    Index Utilization                        :          100.00 %
-    Total Query Execution Time               :           14.13 milliseconds
-      Query Preparation Times
-        Query Compilation Time               :            0.18 milliseconds
-        Logical Plan Build Time              :            0.03 milliseconds
-        Physical Plan Build Time             :            0.05 milliseconds
-        Query Optimization Time              :            0.00 milliseconds
-      Index Lookup Time                      :            0.13 milliseconds
-      Document Load Time                     :           12.49 milliseconds
-      Runtime Execution Times
-        Query Engine Execution Time          :            0.89 milliseconds
-        System Function Execution Time       :            0.00 milliseconds
-        User-defined Function Execution Time :            0.00 milliseconds
-      Document Write Time                    :            0.06 milliseconds
-      Client Side Metrics
-        Retry Count                          :               0
-        Request Charge                       :           35.35 RUs
-
-      Partition Execution Timeline
-      ┌────────────┬────────────────┬───────────────┬───────────────────┬───────────┐
-      │Partition Id│Start Time (UTC)│End Time (UTC) │Number of Documents│Retry Count│
-      ├────────────┼────────────────┼───────────────┼───────────────────┼───────────┤
-      │           0│ 01:27:58.423408│01:27:58.519234│                 38│          0│
-      └────────────┴────────────────┴───────────────┴───────────────────┴───────────┘
-
-      Scheduling Metrics
-      ┌────────────┬────────────────────┬────────────────────┬────────────────────┬────────────────────┬─────────────────────┐
-      │Partition Id│Response Time (ms)  │Run Time (ms)       │Wait Time (ms)      │Turnaround Time (ms)│Number of Preemptions│
-      ├────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┼─────────────────────┤
-      │           0│                0.02│               95.83│                0.03│               95.85│                    1│
-      └────────────┴────────────────────┴────────────────────┴────────────────────┴────────────────────┴─────────────────────┘
-    ]
-
-
-    Query: Find all T20 games
-    ---------------------------------------------------------------
-
-    [0, Retrieved Document Count                 :           1,661
-    Retrieved Document Size                  :      53,600,914 bytes
-    Output Document Count                    :           1,661
-    Output Document Size                     :               0 bytes
-    Index Utilization                        :          100.00 %
-    Total Query Execution Time               :          184.17 milliseconds
-      Query Preparation Times
-        Query Compilation Time               :            0.10 milliseconds
-        Logical Plan Build Time              :            0.03 milliseconds
-        Physical Plan Build Time             :            0.08 milliseconds
-        Query Optimization Time              :            0.00 milliseconds
-      Index Lookup Time                      :            0.10 milliseconds
-      Document Load Time                     :          170.40 milliseconds
-      Runtime Execution Times
-        Query Engine Execution Time          :           11.04 milliseconds
-        System Function Execution Time       :            0.00 milliseconds
-        User-defined Function Execution Time :            0.00 milliseconds
-      Document Write Time                    :            1.94 milliseconds
-      Client Side Metrics
-        Retry Count                          :               0
-        Request Charge                       :          792.47 RUs
-
-      Partition Execution Timeline
-      ┌────────────┬────────────────┬───────────────┬───────────────────┬───────────┐
-      │Partition Id│Start Time (UTC)│End Time (UTC) │Number of Documents│Retry Count│
-      ├────────────┼────────────────┼───────────────┼───────────────────┼───────────┤
-      │           0│ 01:27:58.528383│01:27:59.267309│               1661│          0│
-      └────────────┴────────────────┴───────────────┴───────────────────┴───────────┘
-
-      Scheduling Metrics
-      ┌────────────┬────────────────────┬────────────────────┬────────────────────┬────────────────────┬─────────────────────┐
-      │Partition Id│Response Time (ms)  │Run Time (ms)       │Wait Time (ms)      │Turnaround Time (ms)│Number of Preemptions│
-      ├────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┼─────────────────────┤
-      │           0│                0.01│              738.92│                0.02│              738.94│                    1│
-      └────────────┴────────────────────┴────────────────────┴────────────────────┴────────────────────┴─────────────────────┘
-    ]
-
-
-    Query: Find all T20 games
-    ---------------------------------------------------------------
-
-    [0, Retrieved Document Count                 :           1,661
-    Retrieved Document Size                  :      53,600,914 bytes
-    Output Document Count                    :           1,661
-    Output Document Size                     :               0 bytes
-    Index Utilization                        :          100.00 %
-    Total Query Execution Time               :          185.51 milliseconds
-      Query Preparation Times
-        Query Compilation Time               :            0.10 milliseconds
-        Logical Plan Build Time              :            0.03 milliseconds
-        Physical Plan Build Time             :            0.04 milliseconds
-        Query Optimization Time              :            0.00 milliseconds
-      Index Lookup Time                      :            0.07 milliseconds
-      Document Load Time                     :          170.14 milliseconds
-      Runtime Execution Times
-        Query Engine Execution Time          :           12.76 milliseconds
-        System Function Execution Time       :            0.00 milliseconds
-        User-defined Function Execution Time :            0.00 milliseconds
-      Document Write Time                    :            1.89 milliseconds
-      Client Side Metrics
-        Retry Count                          :               0
-        Request Charge                       :          792.47 RUs
-
-      Partition Execution Timeline
-      ┌────────────┬────────────────┬───────────────┬───────────────────┬───────────┐
-      │Partition Id│Start Time (UTC)│End Time (UTC) │Number of Documents│Retry Count│
-      ├────────────┼────────────────┼───────────────┼───────────────────┼───────────┤
-      │           0│ 01:27:59.284387│01:28:00.926713│               1661│          1│
-      └────────────┴────────────────┴───────────────┴───────────────────┴───────────┘
-
-      Scheduling Metrics
-      ┌────────────┬────────────────────┬────────────────────┬────────────────────┬────────────────────┬─────────────────────┐
-      │Partition Id│Response Time (ms)  │Run Time (ms)       │Wait Time (ms)      │Turnaround Time (ms)│Number of Preemptions│
-      ├────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┼─────────────────────┤
-      │           0│                0.01│             1642.32│                0.02│             1642.35│                    1│
-      └────────────┴────────────────────┴────────────────────┴────────────────────┴────────────────────┴─────────────────────┘
-    ]
-    ```
-24. In File Explorer, double-click **MatchesPartitionedByHomeTeam.txt**. Compare the values of the **Run Time (ms)** for each query of those in the **Matches.txt** file. For the queries **Find T20 games for England at home** and **Find ODIs played in England between England and Australia**, the timings should be faster due to the way in which the data is partitioned
-
-25. In File Explorer, double-click **MatchesPartitionedByAwayTeam.txt**. The partitioning should have decreased the run time required for the query **Find T20 games for England away**, although the queries **Find T20 games for England at home** and **Find ODIs played in England between England and Australia** should have slowed down.
+26. In File Explorer, double-click **MatchesPartitionedByAwayTeam.txt**. The partitioning should have decreased the run time required for the query **Find T20 games for England away**, although the queries **Find T20 games for England at home** and **Find ODIs played in England between England and Australia** should have slowed down.
 
     > **Note:** Remember that when you specify a partition key, you define a **logical** partition. Internally, Cosmos DB can choose to store several logical partitions in the same **physical** partition, depending on the size and number of logical partitions. The set of logical partitions in a physical partition is referred to as the **partition key range**. When the data was partitioned by home team or away team, it was all stored in the same physical partition. As these logical partitions grow, and new logical partitions are added, then Cosmos DB may choose to add more physical partitions and reorganize the data. There are a larger number of cities than international cricketing countries, so partitioning by city created a larger number of logical partitions, and Cosmos DB decided to distribute these logical partitions across multiple physical partitions. Partitioning by city improves the response time of the query that finds all matches played in Nottingham.
 
-26. In File Explorer, double-click **MatchesPartitionedByMatchType.txt**. In this case, the data is all stored in the same physical partition. Look at the metrics for the query **Find all T20 games**. As described earlier, partitioning by match type does not offer much advantage in performance due to the low number of distinct values.
+27. In File Explorer, double-click **MatchesPartitionedByMatchType.txt**. In this case, the data is all stored in the same physical partition. Look at the metrics for the query **Find all T20 games**. As described earlier, partitioning by match type does not offer much advantage in performance due to the low number of distinct values.
 
-27. Close all open instances of Notepad.
+28. Close all open instances of Notepad.
 
-28. Close Visual Studio 2017.
+29. Close Visual Studio 2017.
 
 #### Task 4: Examine the Physical to Logical Mapping of Partitions
 
@@ -1153,11 +747,25 @@ Before starting this demo:
 
 2. On the **Metrics** blade, on the **Storage** tab, in the **Database(s)** drop-down list, click **Cricket**.
 
-3. In the **Collection(s)** drop-down list, click **MatchesPartitionedByHomeTeam**.
+3. In the **Collection(s)** drop-down list, click **Matches**.
 
-4. In the **Data + Index storage consumed per partition key range** pane, click the bar for the only partition that is displayed. This partition should be named **partition 0**.
+4. In the **Data + Index storage consumed per partition key range** pane, click the bar for the only partition key range that is displayed.
 
-5. In the **Showing partition keys for partition 0** pane, you should see the top three partition keys defining the logical partitions in partition 0. These should be labelled **England**, **Australia**, and **India**.
+5. In the **Showing partition keys for partition 0** pane, you should not see any partition keys. This is because the Matches collection is not partitioned - all of the data is held in a single anonymous partition.
+
+6. In the **Collection(s)** drop-down list, click **MatchesPartitionedByHomeTeam**. If **MatchesPartitionedByHomeTeam** is not visable, click **Refresh**, and then try again.
+
+7. In the **Data + Index storage consumed by top partition keys** pane, you should see three partitions. Hover the mouse over each partition in turn, and you will see that these partitions are for **England**, **Australia**, and **India**. These are the three biggest partitions in the database.
+
+8. In the **Data + Index storage consumed per partition key range** pane, click the bar for the only partition key range that is displayed.
+
+9. In the **Showing partition keys for partition 0** pane, you should see the top three partition keys defining the logical partitions in partition 0 (the partition key range). These should be labelled **England**, **Australia**, and **India**.
+
+10. In the **Collection(s)** drop-down list, click **MatchesPartitionedByCity**.
+
+11. In the **Data + Index storage consumed by top partition keys** pane, you should see three partitions. Hover the mouse over each partition in turn, and you will see that these partitions are for **Undefined** (no city was specified in the match data), **London**, and **Abu Dhabi**. Note that the **Undefined** partition is substantially larger than the others. This imbalance in partitioning can lead to hot spots in the data - if this partitioning scheme is used the **Undefined** partition is likely to be the subject of many more queries than the others. In a live database, this could increase contention for the data in this partition and subsequentally cause a drop in performance.
+
+    > **Note:** Ideally, you should select a partitioning scheme that provides an even distribution of data across partitions.
 
 ## Lesson 2: Monitoring the performance of a database
 
@@ -1173,9 +781,9 @@ Before starting this demo:
 
 3. If the **Message from webpage** dialog box appears, click **OK**.
 
-4. On the **Replicate data globally** blade, under **READ REGIONS**, click the trash can icon to delete the failover, and then click **Save**. This can take upto 5 minutes to save.
+4. On the **Replicate data globally** blade, under **READ REGIONS**, click the trash can icon to remove the read region, and then click **Save**. This can take upto 5 minutes to save.
 
-5. On the **20777a-sql-\<*your name\>-\<the day*\>** blade, under **Settings**, click **Default consistency**. 
+5. On the **20777a-sql-\<*your name\>-\<the day*\>** blade, under **Settings**, click **Default consistency**.
 
 6. On the **Default consistency** blade, click **STRONG**, and then click **Save**.
 
@@ -1313,7 +921,7 @@ Before starting this demo:
 
 8. In Solution Explorer, click **App.config**.
 
-9. On the **App.config** tab, enter the values for the following settings: 
+9. On the **App.config** tab, enter the values for the following settings:
     - **EndpointUrl**. Replace **\~URI\~** with the **URI** you noted earlier from the **20777a-sql-\<*your name\>-\<the day*\>** Cosmos DB account.
 
     - **PrimaryKey**. Replace **\~PRIMARY KEY\~** with the **PRIMARY KEY** you noted earlier from the**20777a-sql-\<*your name\>-\<the day*\>** Cosmos DB account.
@@ -1336,9 +944,9 @@ Before starting this demo:
 
 10. On the **Build** menu, click **Build Solution**, and wait until the build has succeeded.
 
-11. On the **Debug** menu, click **Start Debugging**. Remember that the app may pause for up to 60 seconds at the end to allow the workers to complete before terminating.
+11. On the **Debug** menu, click **Start Debugging**. Remember that the app may pause for up to 60 seconds at the end to allow the workers to complete before terminating. When the app finishes, note the number of errors reported. These are read errors caused by concurrent read requests requiring more RU/s than are available to the collection.
 
-12. In File Explorer, navigate to **E:**\\**Demofiles\\Mod04**, and then double-click any of the **Matches-Strong-worker.txt** files. These files contains a copy of the elapsed timings for the queries using the **Matches** non-partitioned and fully indexed collection. It should look similar to the following. **Ignore the first elapsed time for each query** and focus on the second. The file should look similar to this (you might need to realign some of the tabbed data):
+12. In File Explorer, navigate to **E:**\\**Demofiles\\Mod04**, and then double-click any of the **Matches-Strong-worker.txt** files that have a 2KB file size. These files contains a copy of the elapsed timings for the queries using the **Matches** non-partitioned and fully indexed collection. It should look similar to the following. **Ignore the first elapsed time for each query** and focus on the second. The file should look similar to this (you might need to realign some of the tabbed data):
 
     ```Text
     Execution Time  Response Time   Number of Docs  Total Size  Charge  Burst Throughput    Query
@@ -1353,6 +961,9 @@ Before starting this demo:
     190.77          5106            1661            53600914    792.85  4156.05179011375    Worker 6: Find all T20 games
     176.01          9801            1661            53600914    792.85  4504.57360377251    Worker 6: Find all T20 games
     ```
+
+    > **Note:** The files with a 1KB size are curtailed because they resulted in a read error, due to the contention caused by the Strong consistency level used by the application.
+
 13. Observe the **Response Time**, **Charge**, and the **Burst Throughput** value for each query. The response time gives a measure of how long the user would have to wait for the results, and the charge illustrates the resources consumed by the query. The burst throughput shows how many RU/s were required while the query was run.
 
     > **Note:** The response time includes the time taken by any attempts that the client made to repeat a failed query. Naturally, the more contention that occurs between clients the more often queries fail, therefore the more attempts are required, and the greater the response time.
@@ -1363,11 +974,11 @@ Before starting this demo:
 
 16. On the **Metrics** blade, on the **Throughput** tab, in the **Database(s)** drop-down list, click **Cricket**.
 
-17. Ensure that the **1 hour** interval is selected.
+17. In the **Collections** drop-down list, click **Matches**.
 
-18. Examine the **Number of requests exceeded capacity (aggregated over 1 minute interval)** graph. This graph shows how many requests failed due to **Request rate is large** Http 429 errors (you may need to wait for up to 5 minutes to see the data). This should exceed the number of errors reported by the app, possibly by an order or two of magnitude. This is because the app is configured to retry queries up to 10 times before reporting an exception. This graph gives a true measure of how many requests actually failed.
+18. Ensure that the **1 hour** interval is selected.
 
-19. In the **Collection(s)** drop-down list, click **Matches**.
+19. Examine the **Number of requests exceeded capacity (aggregated over 1 minute interval)** graph. This graph shows how many requests failed due to **Request rate is large** Http 429 errors (you may need to wait for up to 5 minutes to see the data). This should exceed the number of errors reported by the app, possibly by an order or two of magnitude. This is because the app is configured to retry queries up to 10 times before reporting an exception. This graph gives a true measure of how many requests actually failed.
 
 20. Examine the **Max consumed RU/s per partition key range** graph. In this graph, you should see that the throughput in RU/s consumed by the app frequently peaks above the provisioned level (1000). These peaks should reflect the figures captured by the statistics in the text file you examined using Notepad (the figures in Notepad might be higher if a peak occurs during the sampling interval used by the Azure metrics.)
 
@@ -1393,7 +1004,7 @@ Before starting this demo:
     171.71          5040            1661            53600914    792.47  4615.16510395434    Worker 1: Find all T20 games
     ```
 
-    - The **Response Times** should have reduced slightly from before, but the **Charge** and **Burst Throughput** figures should be significantly lower; the charge is likely to be half that of the run that used strong consistency.
+    - The **Response Times** should have reduced slightly from before, but the **Charge** and **Burst Throughput** figures should be significantly lower; the charge is likely to be half that of the run that used strong consistency. There should also be fewer errors (if any) reported when the application finishes; the Eventual consistecy level causes less contention.
 
 25. Close Notepad.
 
@@ -1441,7 +1052,7 @@ Before starting this demo:
 
 8. In the **Showing partition keys for partition 0** pane, you should see the top three partition keys, these should be **T20**, **ODI**, and **Test**.
 
-**Task 3: Demonstration clean up**
+#### Task 3: Demonstration clean up
 
 1. In the Azure portal, in the left pane, click **Resource groups**.
 
