@@ -485,12 +485,11 @@ This demonstration assumes that you have completed the previous demonstrations i
     ```CSharp
     class DeleteOldDocsResponse
     {
-    [JsonProperty("deleted")]
-    public int Deleted { get; set; }
+        [JsonProperty("deleted")]
+        public int Deleted { get; set; }
 
-    [JsonProperty("continuation")]
-    public bool Continuation { get; set; }
-
+        [JsonProperty("continuation")]
+        public bool Continuation { get; set; }
     }
     ```
 
